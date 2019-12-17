@@ -6,7 +6,7 @@ import EpisodeCard from '../components/EpisodeCard'
 class EpisodesContainer extends React.Component {
     render() {
         return (
-            <div>
+            <div className="ui grid container">
                 {this.props.searchResults.map(episodeObj => <EpisodeCard key={episodeObj.id} episodeObj={episodeObj}/>)}
             </div>
         )

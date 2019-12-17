@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.margin-class {
+  margin-top: 14px !important;
+  margin-bottom: 14px !important;
+}
+
+.audio-size {
+  height: 50px !important;
+  width: 250px !important;
+}

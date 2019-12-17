@@ -17,7 +17,6 @@ const fetchSearchResults = (query) => {
         })
         .then(resp => resp.json())
         .then(searchResults => {
-            console.log(searchResults)
             dispatch(addSearchResults(searchResults))
         })
     }
