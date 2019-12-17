@@ -4,7 +4,6 @@ const addSearchResults = (searchResults) => {
 
 const fetchSearchResults = (query) => {
     return (dispatch) => {
-        // dispatch({ type: "START_ADDING_SEARCH_RESULTS_REQUEST" })
         fetch("http://localhost:3000/search", {
         method: "POST",
         headers: {

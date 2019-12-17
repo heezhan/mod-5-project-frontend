@@ -4,11 +4,8 @@ import { fetchSearchResults } from '../redux/actions/fetchSearchResults';
 
 class SearchBar extends React.Component {
 
-    constructor() {
-        super()
-        this.state = {
-            query: ""
-        }
+    state = {
+        query: ""
     }
 
     onChangeSearch = (event) => {
