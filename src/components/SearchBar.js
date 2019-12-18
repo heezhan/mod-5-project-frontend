@@ -14,23 +14,25 @@ class SearchBar extends React.Component {
         })
     }
 
-    searchHandler = () => {
+    searchHandler = (event) => {
+        event.preventDefault()
         this.props.fetchSearchResults(this.state.query)
     }
 
     render() {
         return (
             <div>
-                <input 
-                    type="text" 
-                    value={this.state.query} 
-                    onChange={this.onChangeSearch} 
-                    placeholder="Search"
-                />
-
-                <button onClick={this.searchHandler}>
-                    Search
-                </button>
+                <form onSubmit={this.searchHandler}>
+                    <div className="ui huge icon input">
+                            <input 
+                                type="text" 
+                                value={this.state.query} 
+                                onChange={this.onChangeSearch} 
+                                placeholder="Search"
+                            />
+                        <i className="search icon" />
+                    </div>
+                </form>
             </div>
         )
     }

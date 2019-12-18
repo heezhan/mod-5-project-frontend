@@ -10,7 +10,7 @@ class EpisodeCard extends React.Component {
                 <img className="ui centered small image" src={thumbnail} />
                 <div className="content">
                     <Link to={`/episodes/${id}`}>
-                        <div className="header" onClick={null}>
+                        <div className="header">
                             {title_original}
                         </div>
                     </Link>

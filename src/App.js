@@ -15,26 +15,31 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        
         <Route exact path="/">
           < NavBar />
           < SearchBar />
           < FiltersContainer />
           < EpisodesContainer />
         </Route>
-
+   
         <Route exact path="/login">
           < Login />
         </Route>
 
-        {this.props.currentUser ? < Redirect to={"/playlists"} /> : null }
+        {this.props.currentUser ? < Redirect to={"/"} /> : null }
 
         <Route exact path="/playlists">
           <PlaylistsContainer />
         </Route>
 
-        <Route exact path="/episodes/:id">
-          < EpisodeDetails />
-        </Route>
+        <Route exact path="/episodes/:id" render={
+          (props) => 
+          { 
+            let api_id = props.match.params.id
+            return <EpisodeDetails api_id={api_id} />
+          }
+        }/>
 
       </div>
     )

@@ -44,5 +44,6 @@
 
 .audio-size {
   height: 50px !important;
-  width: 250px !important;
+  /* width: 250px !important; */
+  width: 15vw !important;
 }
