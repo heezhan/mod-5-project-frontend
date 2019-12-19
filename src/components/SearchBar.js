@@ -39,7 +39,7 @@ class SearchBar extends React.Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
+    return { 
       fetchSearchResults: (query) => dispatch(fetchSearchResults(query))
     }
 }

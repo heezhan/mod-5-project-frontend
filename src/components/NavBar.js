@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 class NavBar extends React.Component {
     render() {
@@ -18,11 +19,20 @@ class NavBar extends React.Component {
                     </a>
 
                     <div className="right menu">
-                        <Link to="/login">
-                            <a className="item">
-                                Login
-                            </a>
-                        </Link>
+
+                        {this.props.currentUser ? (
+                        // dispatch an action to set the currentUser state to null
+                                <a className="item">
+                                    Logout
+                                </a>
+
+                        ) : (
+                            <Link to="/login">
+                                <a className="item">
+                                    Login
+                                </a>
+                            </Link>
+                        )}
                     </div>
                     
                 </div>
@@ -31,4 +41,10 @@ class NavBar extends React.Component {
     }
 }
 
-export default NavBar
+function mapStateToProps(state) {
+    return {
+        currentUser: state.currentUser
+    }
+}
+
+export default connect(mapStateToProps)(NavBar)

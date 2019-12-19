@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Popup, Checkbox, Divider } from 'semantic-ui-react'
+import { fetchEpisode } from '../redux/actions/fetchEpisode'
 
 class EpisodeDetails extends React.Component {
 
@@ -8,29 +9,37 @@ class EpisodeDetails extends React.Component {
         selectedPlaylists: []
     }
 
-    toggleCheckbox = (playlistObj) => {
+    toggleCheckbox = (playlistObj, episodeObj) => {
+        console.log(episodeObj)  
+
         if (this.state.selectedPlaylists.includes(playlistObj)) {
             let updatedSelectedPlaylists = this.state.selectedPlaylists.filter(playlist => playlist.id !== playlistObj.id) 
+
             this.setState({
                 selectedPlaylists: updatedSelectedPlaylists
-            }, () => {
-                
             })
-        } else {
+        } else { 
             this.setState({
                 selectedPlaylists: [...this.state.selectedPlaylists, playlistObj]
             })
+            this.props.fetchEpisode(episodeObj)
         }
     }
 
-    renderPopup = () => {
+    renderPopup = (episodeObj) => {
         return <Popup
         content={
-            this.props.currentUser.playlists.map(playlistObj => <Checkbox
+            this.props.currentUser ? 
+            (   this.props.currentUser.playlist.count > 
+                this.props.currentUser.playlists.map(playlistObj => <Checkbox
                 label={<label>{playlistObj.title}</label>}
                 value={playlistObj.id}
-                onChange={() => this.toggleCheckbox(playlistObj)}
-                checked={this.state.selectedPlaylists.includes(playlistObj)} />
+                onChange={
+                    () => this.toggleCheckbox(playlistObj, episodeObj)
+                }
+                checked={this.state.selectedPlaylists.includes(playlistObj)} />)
+            ) : (
+                "No playlists yet"
             )
         }
         on="click"
@@ -45,7 +54,9 @@ class EpisodeDetails extends React.Component {
     render() {
         const episodeObjInArray = this.props.searchResults.filter(episodeObj => episodeObj.id === this.props.api_id)
 
-        const {id, thumbnail, title_original, podcast_title_original, publisher_original, audio, description_original} = episodeObjInArray[0] 
+        const episodeObj = episodeObjInArray[0]
+
+        const {id, thumbnail, title_original, podcast_title_original, publisher_original, audio, description_original} = episodeObj 
 
         return (
             <div>
@@ -61,7 +72,7 @@ class EpisodeDetails extends React.Component {
                 <h3>About This Episode</h3>
                 <h3>{description_original}</h3>
                 <div className="title">
-                    {this.renderPopup()}
+                    {this.renderPopup(episodeObj)}
                 </div>
             </div>
         )
@@ -75,4 +86,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(EpisodeDetails)
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchEpisode: (episodeObj) => dispatch(fetchEpisode(episodeObj))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EpisodeDetails)
