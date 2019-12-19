@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Popup, Checkbox } from 'semantic-ui-react'
+import { Button, Popup, Checkbox, Divider } from 'semantic-ui-react'
 
 class EpisodeDetails extends React.Component {
 
@@ -13,6 +13,8 @@ class EpisodeDetails extends React.Component {
             let updatedSelectedPlaylists = this.state.selectedPlaylists.filter(playlist => playlist.id !== playlistObj.id) 
             this.setState({
                 selectedPlaylists: updatedSelectedPlaylists
+            }, () => {
+                
             })
         } else {
             this.setState({
@@ -28,12 +30,11 @@ class EpisodeDetails extends React.Component {
                 label={<label>{playlistObj.title}</label>}
                 value={playlistObj.id}
                 onChange={() => this.toggleCheckbox(playlistObj)}
-                checked={this.state.selectedPlaylists.includes(playlistObj)}
-                />
+                checked={this.state.selectedPlaylists.includes(playlistObj)} />
             )
         }
         on="click"
-        pinned
+        pinned 
         position="bottom center"
         trigger={
             <Button icon="add" content="Add to Playlist"/>

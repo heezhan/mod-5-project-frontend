@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrentUser } from '../redux/actions/fetchCurrentUser';
+import { Segment, Button, Form, Input } from 'semantic-ui-react';
 
 class Login extends React.Component {
     
@@ -18,17 +19,38 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <h4>
-                    Username
-                    <input type="text" name="username" value={this.state.username} onChange={this.onChangeLogin} />
-                </h4>
-                <h4>
-                    Password
-                    <input type="password" name="password" value={this.state.password} onChange={this.onChangeLogin} />
-                </h4>
-                <button onClick={() => this.props.fetchCurrentUser(this.state)}>
-                    Login
-                </button>
+                <Segment basic textAlign='center'>
+                    <Form 
+                    size="large"
+                    onSubmit={() => this.props.fetchCurrentUser(this.state)}>
+                        <Input 
+                            type="text"
+                            icon="user"
+                            iconPosition="left"
+                            placeholder="Username"
+                            name="username" 
+                            value={this.state.username} 
+                            onChange={this.onChangeLogin}
+                        />
+                        <br />
+                        <br />
+                        <Input 
+                            type="password"
+                            icon="lock"
+                            iconPosition="left"
+                            placeholder="Password" 
+                            name="password" 
+                            value={this.state.password} 
+                            onChange={this.onChangeLogin}
+                        />
+                        <br />
+                        <br />
+                        <Button  
+                            type="submit"
+                            content="Login"
+                        />
+                    </Form>
+                </Segment>
             </div>
         )
     }
