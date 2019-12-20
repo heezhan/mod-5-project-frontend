@@ -3,10 +3,11 @@ import { combineReducers } from 'redux';
 const rootReducer = combineReducers({
     searchResults: searchResultsReducer,
     currentUser: currentUserReducer,
-    allUserEpisodes: episodeReducer
+    allUserEpisodes: episodeReducer,
+    allUserPlaylists: playlistReducer
 })
 
-function searchResultsReducer (searchResults = [], action) {
+function searchResultsReducer(searchResults = [], action) {
         switch (action.type) {
             case "ADD_SEARCH_RESULTS":
                 return action.payload.results
@@ -15,7 +16,7 @@ function searchResultsReducer (searchResults = [], action) {
         }
     }
 
-function  currentUserReducer (currentUser = null, action) {
+function  currentUserReducer(currentUser = null, action) {
     switch(action.type) {
         case "ADD_CURRENT_USER":
             return action.payload
@@ -24,12 +25,21 @@ function  currentUserReducer (currentUser = null, action) {
     }
 }
 
-function episodeReducer (allUserEpisodes = [], action) {
+function episodeReducer(allUserEpisodes = [], action) {
     switch(action.type) {
         case "ADD_EPISODE":
             return [...allUserEpisodes, action.payload]
         default:
             return allUserEpisodes
+    }
+}
+
+function playlistReducer(allUserPlaylists = [], action) {
+    switch(action.type) {
+        case "ADD_PLAYLIST":
+            return [...allUserPlaylists, action.payload]
+        default:
+            return allUserPlaylists
     }
 }
     

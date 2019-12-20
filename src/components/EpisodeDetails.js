@@ -1,12 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Popup, Checkbox, Divider } from 'semantic-ui-react'
-import { fetchEpisode } from '../redux/actions/fetchEpisode'
+import { Button, Popup, Checkbox, Divider } from 'semantic-ui-react';
+import { fetchEpisode } from '../redux/actions/fetchEpisode';
+import { fetchPlaylist } from '../redux/actions/fetchPlaylist';
 
 class EpisodeDetails extends React.Component {
 
     state = {
-        selectedPlaylists: []
+        selectedPlaylists: [],
+        title: ""
+    }
+
+    onChangeTitle = (event) => {
+        this.setState({
+            title: event.target.value
+        }) 
     }
 
     toggleCheckbox = (playlistObj, episodeObj) => {
@@ -26,20 +34,45 @@ class EpisodeDetails extends React.Component {
         }
     }
 
-    renderPopup = (episodeObj) => {
-        return <Popup
-        content={
+    renderPopup = (episodeObj) => { 
+        return <Popup 
+        content={ 
             this.props.currentUser ? 
-            (   this.props.currentUser.playlist.count > 
-                this.props.currentUser.playlists.map(playlistObj => <Checkbox
-                label={<label>{playlistObj.title}</label>}
-                value={playlistObj.id}
-                onChange={
-                    () => this.toggleCheckbox(playlistObj, episodeObj)
-                }
-                checked={this.state.selectedPlaylists.includes(playlistObj)} />)
+            (   this.props.currentUser.playlists.length > 0 ?  
+                (
+                    <div>
+                        {this.props.allUserPlaylists.map(playlistObj => 
+                            <Checkbox
+                                label={<label>{playlistObj.title}</label>}
+                                value={playlistObj.id}
+                                onChange={
+                                    () => this.toggleCheckbox(playlistObj, episodeObj)
+                                }
+                                checked={this.state.selectedPlaylists.includes(playlistObj)} 
+                            />
+                        )}
+                        < Divider />
+                        <input 
+                            type="text" 
+                            placeholder="Title" 
+                            value={this.state.title} 
+                            onChange={this.onChangeTitle}
+                        />
+                        <button 
+                            onClick={() => this.props.fetchPlaylist({user_id: this.props.currentUser.id, title: this.state.title})} 
+                        >
+                            Create a playlist
+                        </button>
+                    </div>
+                ) : (
+                    <div>
+                        No playlists yet
+                        < Divider />
+                    </div>
+                )
             ) : (
-                "No playlists yet"
+                // create an alert
+                "Not logged in"
             )
         }
         on="click"
@@ -82,13 +115,15 @@ class EpisodeDetails extends React.Component {
 function mapStateToProps(state) {
     return {
         searchResults: state.searchResults,
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        allUserPlaylists: state.allUserPlaylists
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchEpisode: (episodeObj) => dispatch(fetchEpisode(episodeObj))
+        fetchEpisode: (episodeObj) => dispatch(fetchEpisode(episodeObj)),
+        fetchPlaylist: (playlistObj) => dispatch(fetchPlaylist(playlistObj))
     }
 }
 

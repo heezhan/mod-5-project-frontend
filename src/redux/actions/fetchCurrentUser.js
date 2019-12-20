@@ -1,3 +1,5 @@
+import { addPlaylist } from './fetchPlaylist';
+
 const addCurrentUser = (userObj) => {
     return {type: "ADD_CURRENT_USER", payload: userObj}
 }
@@ -21,6 +23,7 @@ const fetchCurrentUser = (userObj) => {
                 alert(userObj.message)
             } else {
                 dispatch(addCurrentUser(userObj))
+                userObj.playlists.map(playlist => dispatch(addPlaylist(playlist)))
             }
         })
     }

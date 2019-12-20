@@ -8,6 +8,10 @@ class SearchBar extends React.Component {
         query: ""
     }
 
+    componentDidMount() {
+        // dispatch an action to clear state for searchResults
+    }
+
     onChangeSearch = (event) => {
         this.setState({
             query: event.target.value
@@ -26,9 +30,9 @@ class SearchBar extends React.Component {
                     <div className="ui huge icon input">
                             <input 
                                 type="text" 
+                                placeholder="Search"
                                 value={this.state.query} 
                                 onChange={this.onChangeSearch} 
-                                placeholder="Search"
                             />
                         <i className="search icon" />
                     </div>

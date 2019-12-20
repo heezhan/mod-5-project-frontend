@@ -9,6 +9,7 @@ import EpisodesContainer from './containers/EpisodesContainer';
 import EpisodeDetails from './components/EpisodeDetails';
 import Login from './components/Login';
 import PlaylistsContainer from './containers/PlaylistsContainer';
+import PlaylistDetails from './components/PlaylistDetails';
 
 class App extends React.Component {
 
@@ -28,10 +29,14 @@ class App extends React.Component {
           < Login />
         </Route>
 
-        {this.props.currentUser ? < Redirect to={"/"} /> : null }
+        {this.props.currentUser ? < Redirect to={"/playlists"} /> : null }
 
         <Route exact path="/playlists">
           <PlaylistsContainer />
+        </Route>
+        
+        <Route exact path="/playlistdetails">
+          < PlaylistDetails />
         </Route>
 
         <Route exact path="/episodes/:id" render={
