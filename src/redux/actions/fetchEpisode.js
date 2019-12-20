@@ -2,7 +2,7 @@ const addEpisode = (episode) => {
     return {type: "ADD_EPISODE", payload: episode}
 }
 
-const fetchEpisode = (episodeObj) => {
+const fetchEpisode = (playlistObj, episodeObj) => {
     let {id, podcast_id, thumbnail, image, podcast_title_original, title_original, publisher_original, description_original, audio} = episodeObj
 
     return (dispatch) => {
@@ -21,11 +21,15 @@ const fetchEpisode = (episodeObj) => {
                 title_original: title_original,
                 publisher_original: publisher_original, 
                 description_original: description_original,
-                audio: audio 
+                audio: audio,
+
+                playlist_id: playlistObj.id
             })
         })
         .then(resp => resp.json())
-        .then(episode => dispatch(addEpisode(episode)))
+        .then(episode => {
+            debugger 
+            dispatch(addEpisode(episode))})
     }
 }
 

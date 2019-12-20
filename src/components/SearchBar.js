@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchSearchResults } from '../redux/actions/fetchSearchResults';
 
 class SearchBar extends React.Component {
-
     state = {
         query: ""
     }

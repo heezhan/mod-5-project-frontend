@@ -1,20 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import PlaylistCard from '../components/PlaylistCard';
 
 class PlaylistsContainer extends React.Component {
     render() {
-        let { playlists } = this.props.currentUser
+        const playlistArray = this.props.allUserPlaylists
          
         return (
             <div>
                 <h1>My Playlists</h1>
                 {
-                    playlists.map(
-                        playlist => 
-                            <Link to="/playlistdetails">
-                                <h2>{playlist.title}</h2>
-                            </Link>
+                    playlistArray.map(
+                        playlistObj => 
+                            < PlaylistCard playlist={playlistObj} />
                     )
                 }
             </div>
@@ -24,7 +22,7 @@ class PlaylistsContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        currentUser: state.currentUser
+        allUserPlaylists: state.allUserPlaylists
     }
 }
 

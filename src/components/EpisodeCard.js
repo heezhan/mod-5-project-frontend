@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 class EpisodeCard extends React.Component {
     render() {
-        let {id, thumbnail, title_original, podcast_title_original, publisher_original, audio} = this.props.episodeObj
+        const {id, thumbnail, title_original, podcast_title_original, publisher_original, audio} = this.props.episodeObj
       
         return (
             <div className="ui card four wide column margin-class">

@@ -18,8 +18,18 @@ class NavBar extends React.Component {
                         About
                     </a>
 
-                    <div className="right menu">
+                    {this.props.currentUser ? (
+                        <Link to='/playlists'>
+                            <a className="item">
+                                My Playlists 
+                            </a>
+                        </Link>
+                    ) : (
+                        null
+                    )}
+                    
 
+                    <div className="right menu">
                         {this.props.currentUser ? (
                         // dispatch an action to set the currentUser state to null
                                 <a className="item">

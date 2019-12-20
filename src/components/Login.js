@@ -4,7 +4,6 @@ import { fetchCurrentUser } from '../redux/actions/fetchCurrentUser';
 import { Segment, Button, Form, Input } from 'semantic-ui-react';
 
 class Login extends React.Component {
-    
     state = {
         username: "",
         password: ""

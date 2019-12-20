@@ -5,10 +5,14 @@ import { fetchEpisode } from '../redux/actions/fetchEpisode';
 import { fetchPlaylist } from '../redux/actions/fetchPlaylist';
 
 class EpisodeDetails extends React.Component {
-
     state = {
         selectedPlaylists: [],
         title: ""
+    }
+
+    clickHandler = () => {
+        // clear form input
+        this.props.fetchPlaylist({user_id: this.props.currentUser.id, title: this.state.title})
     }
 
     onChangeTitle = (event) => {
@@ -17,8 +21,7 @@ class EpisodeDetails extends React.Component {
         }) 
     }
 
-    toggleCheckbox = (playlistObj, episodeObj) => {
-        console.log(episodeObj)  
+    toggleCheckbox = (playlistObj, episodeObj) => {  
 
         if (this.state.selectedPlaylists.includes(playlistObj)) {
             let updatedSelectedPlaylists = this.state.selectedPlaylists.filter(playlist => playlist.id !== playlistObj.id) 
@@ -30,7 +33,7 @@ class EpisodeDetails extends React.Component {
             this.setState({
                 selectedPlaylists: [...this.state.selectedPlaylists, playlistObj]
             })
-            this.props.fetchEpisode(episodeObj)
+            this.props.fetchEpisode(playlistObj, episodeObj)
         }
     }
 
@@ -59,7 +62,7 @@ class EpisodeDetails extends React.Component {
                             onChange={this.onChangeTitle}
                         />
                         <button 
-                            onClick={() => this.props.fetchPlaylist({user_id: this.props.currentUser.id, title: this.state.title})} 
+                            onClick={this.clickHandler} 
                         >
                             Create a playlist
                         </button>
@@ -122,7 +125,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchEpisode: (episodeObj) => dispatch(fetchEpisode(episodeObj)),
+        fetchEpisode: (playlistObj, episodeObj) => dispatch(fetchEpisode(playlistObj, episodeObj)),
         fetchPlaylist: (playlistObj) => dispatch(fetchPlaylist(playlistObj))
     }
 }
