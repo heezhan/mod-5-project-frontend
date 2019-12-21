@@ -41,7 +41,7 @@ class EpisodeDetails extends React.Component {
         return <Popup 
         content={ 
             this.props.currentUser ? 
-            (   this.props.currentUser.playlists.length > 0 ?  
+            (   this.props.allUserPlaylists.length > 0 ?  
                 (
                     <div>
                         {this.props.allUserPlaylists.map(playlistObj => 
@@ -71,6 +71,17 @@ class EpisodeDetails extends React.Component {
                     <div>
                         No playlists yet
                         < Divider />
+                        <input 
+                            type="text" 
+                            placeholder="Title" 
+                            value={this.state.title} 
+                            onChange={this.onChangeTitle}
+                        />
+                        <button 
+                            onClick={this.clickHandler} 
+                        >
+                            Create a playlist
+                        </button>
                     </div>
                 )
             ) : (
@@ -88,9 +99,14 @@ class EpisodeDetails extends React.Component {
     }
     
     render() {
-        const episodeObjInArray = this.props.searchResults.filter(episodeObj => episodeObj.id === this.props.api_id)
-
-        const episodeObj = episodeObjInArray[0]
+        let episodeObj
+        let userEpisode = this.props.allUserEpisodes.find( ({api_id}) => api_id === this.props.apiId )
+        
+        if (userEpisode) {
+            episodeObj = userEpisode
+        } else {
+            episodeObj = this.props.searchResults.find( ({id}) => id === this.props.apiId )
+        } 
 
         const {id, thumbnail, title_original, podcast_title_original, publisher_original, audio, description_original} = episodeObj 
 
@@ -119,7 +135,8 @@ function mapStateToProps(state) {
     return {
         searchResults: state.searchResults,
         currentUser: state.currentUser,
-        allUserPlaylists: state.allUserPlaylists
+        allUserPlaylists: state.allUserPlaylists,
+        allUserEpisodes: state.allUserEpisodes
     }
 }
 

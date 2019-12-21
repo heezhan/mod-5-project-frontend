@@ -27,10 +27,9 @@ const fetchEpisode = (playlistObj, episodeObj) => {
             })
         })
         .then(resp => resp.json())
-        .then(episode => {
-            debugger 
+        .then(episode => { 
             dispatch(addEpisode(episode))})
     }
 }
 
-export { fetchEpisode } 
+export { addEpisode, fetchEpisode } 

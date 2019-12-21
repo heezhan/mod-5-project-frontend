@@ -35,7 +35,7 @@ class App extends React.Component {
           <PlaylistsContainer />
         </Route>
         
-        <Route exact path="/playlist/:id" 
+        <Route exact path="/playlists/:id" 
           render={
             (props) => { 
               const id = parseInt(props.match.params.id)
@@ -47,8 +47,8 @@ class App extends React.Component {
         <Route exact path="/episodes/:id" render={
           (props) => 
           { 
-            const api_id = props.match.params.id
-            return <EpisodeDetails api_id={api_id} />
+            const apiId = props.match.params.id  
+            return <EpisodeDetails apiId={apiId} />
           }
         }/>
 

@@ -8,7 +8,7 @@ class PlaylistCard extends React.Component {
         return (
             <div>
                 <h2>
-                    <Link to={`/playlist/${id}`}>
+                    <Link to={`/playlists/${id}`}>
                         {title}
                     </Link>
                 </h2>
