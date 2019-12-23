@@ -51,7 +51,8 @@ class EpisodeDetails extends React.Component {
                                 onChange={
                                     () => this.toggleCheckbox(playlistObj, episodeObj)
                                 }
-                                checked={this.state.selectedPlaylists.includes(playlistObj)} 
+                                checked={this.state.selectedPlaylists.includes(playlistObj)}
+                                // playlistObj.episodes.includes(episodeObj) 
                             />
                         )}
                         < Divider />
@@ -101,14 +102,17 @@ class EpisodeDetails extends React.Component {
     render() {
         let episodeObj
         let userEpisode = this.props.allUserEpisodes.find( ({api_id}) => api_id === this.props.apiId )
+        let id 
         
         if (userEpisode) {
             episodeObj = userEpisode
+            id = episodeObj.api_id
         } else {
             episodeObj = this.props.searchResults.find( ({id}) => id === this.props.apiId )
+            id = episodeObj.id
         } 
 
-        const {id, thumbnail, title_original, podcast_title_original, publisher_original, audio, description_original} = episodeObj 
+        const {thumbnail, title_original, podcast_title_original, publisher_original, audio, description_original} = episodeObj 
 
         return (
             <div>

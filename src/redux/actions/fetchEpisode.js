@@ -27,8 +27,9 @@ const fetchEpisode = (playlistObj, episodeObj) => {
             })
         })
         .then(resp => resp.json())
-        .then(episode => { 
-            dispatch(addEpisode(episode))})
+        .then(episode => {
+            dispatch(addEpisode(episode))
+        })
     }
 }
 

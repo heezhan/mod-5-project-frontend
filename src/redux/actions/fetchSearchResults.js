@@ -21,5 +21,5 @@ const fetchSearchResults = (query) => {
     }
 }
 
-export { fetchSearchResults }
+export { addSearchResults, fetchSearchResults }
 
