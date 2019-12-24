@@ -21,7 +21,7 @@ class EpisodeDetails extends React.Component {
         }) 
     }
 
-    toggleCheckbox = (playlistObj, episodeObj) => {  
+    toggleCheckbox = (playlistObj, episodeObj, id) => {  
 
         if (this.state.selectedPlaylists.includes(playlistObj)) {
             let updatedSelectedPlaylists = this.state.selectedPlaylists.filter(playlist => playlist.id !== playlistObj.id) 
@@ -33,11 +33,11 @@ class EpisodeDetails extends React.Component {
             this.setState({
                 selectedPlaylists: [...this.state.selectedPlaylists, playlistObj]
             })
-            this.props.fetchEpisode(playlistObj, episodeObj)
+            this.props.fetchEpisode(playlistObj, episodeObj,id)
         }
     }
 
-    renderPopup = (episodeObj) => { 
+    renderPopup = (episodeObj, id) => { 
         return <Popup 
         content={ 
             this.props.currentUser ? 
@@ -49,7 +49,7 @@ class EpisodeDetails extends React.Component {
                                 label={<label>{playlistObj.title}</label>}
                                 value={playlistObj.id}
                                 onChange={
-                                    () => this.toggleCheckbox(playlistObj, episodeObj)
+                                    () => this.toggleCheckbox(playlistObj, episodeObj, id)
                                 }
                                 checked={this.state.selectedPlaylists.includes(playlistObj)}
                                 // playlistObj.episodes.includes(episodeObj) 
@@ -128,10 +128,10 @@ class EpisodeDetails extends React.Component {
                 <h3>About This Episode</h3>
                 <h3>{description_original}</h3>
                 <div className="title">
-                    {this.renderPopup(episodeObj)}
+                    {this.renderPopup(episodeObj, id)}
                 </div>
             </div>
-        )
+        ) 
     }
 }
 
@@ -146,7 +146,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchEpisode: (playlistObj, episodeObj) => dispatch(fetchEpisode(playlistObj, episodeObj)),
+        fetchEpisode: (playlistObj, episodeObj, id) => dispatch(fetchEpisode(playlistObj, episodeObj, id)),
         fetchPlaylist: (playlistObj) => dispatch(fetchPlaylist(playlistObj))
     }
 }

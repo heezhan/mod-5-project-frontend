@@ -26,18 +26,36 @@ function  currentUserReducer(currentUser = null, action) {
 }
 
 function episodeReducer(allUserEpisodes = [], action) {
+    debugger 
     switch(action.type) {
         case "ADD_EPISODE":
-            return [...allUserEpisodes, action.payload]
+            if (allUserEpisodes.find( ({id}) => id === action.payload.id )) {
+                let filteredAllUserEpisodes = allUserEpisodes.filter(episode => episode.id !== action.payload.id)
+
+                return [...filteredAllUserEpisodes, action.payload]
+            } else {
+                return [...allUserEpisodes, action.payload]
+            }
         default:
             return allUserEpisodes
     }
 }
 
 function playlistReducer(allUserPlaylists = [], action) {
+    debugger 
     switch(action.type) {
         case "ADD_PLAYLIST":
-            return [...allUserPlaylists, action.payload]
+            if (allUserPlaylists.find( ({id}) => id === action.payload.id)) {
+                let index = allUserPlaylists.findIndex(playlist => playlist.id === action.payload.id)
+
+                let copyOfAllUserPlaylists = [...allUserPlaylists]
+
+                copyOfAllUserPlaylists.splice(index, 1, action.payload)
+
+                return copyOfAllUserPlaylists
+            } else {
+                return [...allUserPlaylists, action.payload]
+            }
         default:
             return allUserPlaylists
     }

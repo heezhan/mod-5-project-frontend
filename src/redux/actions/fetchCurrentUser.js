@@ -22,7 +22,7 @@ const fetchCurrentUser = (userObj) => {
         .then(userObj => {
             if (userObj.message) {
                 alert(userObj.message)
-            } else { 
+            } else {  
                 dispatch(addCurrentUser(userObj))
 
                 userObj.playlists.map(playlist => dispatch(addPlaylist(playlist)))

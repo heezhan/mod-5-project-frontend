@@ -6,7 +6,7 @@ class PlaylistDetails extends React.Component {
     render() {
         const playlistId = this.props.id
 
-        const foundPlaylist = this.props.allUserPlaylists.find( ({id}) => id === playlistId ) 
+        const foundPlaylist = this.props.allUserPlaylists.find( ({id}) => id === playlistId )
 
         return (
             <div>

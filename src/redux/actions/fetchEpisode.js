@@ -1,9 +1,11 @@
+import { addPlaylist } from './fetchPlaylist';
+ 
 const addEpisode = (episode) => {
     return {type: "ADD_EPISODE", payload: episode}
 }
 
-const fetchEpisode = (playlistObj, episodeObj) => {
-    let {id, podcast_id, thumbnail, image, podcast_title_original, title_original, publisher_original, description_original, audio} = episodeObj
+const fetchEpisode = (playlistObj, episodeObj, id) => {
+    let {podcast_id, thumbnail, image, podcast_title_original, title_original, publisher_original, description_original, audio} = episodeObj 
 
     return (dispatch) => {
         fetch("http://localhost:3000/episode", {
@@ -23,12 +25,16 @@ const fetchEpisode = (playlistObj, episodeObj) => {
                 description_original: description_original,
                 audio: audio,
 
-                playlist_id: playlistObj.id
+                playlist_id: playlistObj.id 
             })
         })
         .then(resp => resp.json())
-        .then(episode => {
-            dispatch(addEpisode(episode))
+        .then(episode => { 
+            dispatch(addEpisode(episode)) 
+
+            let found = episode.playlists.find( ({id}) => id === playlistObj.id )
+            debugger 
+            dispatch(addPlaylist(found))
         })
     }
 }
