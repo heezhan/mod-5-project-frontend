@@ -36,9 +36,31 @@ function episodeReducer(allUserEpisodes = [], action) {
                 return [...allUserEpisodes, action.payload]
             }
         case "REMOVE_EPISODE":
-            let filteredAllUserEpisodes = allUserEpisodes.filter(episode => episode.id !== action.payload.id)  
-             
-            return filteredAllUserEpisodes 
+            //if the episode is destroyed from the back end then 
+            //go into the if statement and redirect (is this another fetch call?)
+            if (action.payload.playlists === undefined) {
+                // let filteredAllUserEpisodes = allUserEpisodes.filter(episode => episode.id !== action.payload.id)  
+                
+                // debugger 
+                // return filteredAllUserEpisodes 
+
+                let copyOfAllUserEpisodes = [...allUserEpisodes]
+
+                let foundEpisode = copyOfAllUserEpisodes.find( ({id}) => id === action.payload.id)
+
+                let index = copyOfAllUserEpisodes.indexOf(foundEpisode)
+
+                copyOfAllUserEpisodes.splice(index, 1, action.payload)
+
+                debugger 
+                return copyOfAllUserEpisodes
+            } else {
+                debugger
+                return allUserEpisodes
+            }
+            
+            //if the episode still belongs to another playlist
+            //replace the episode w the updated episode 
         default:
             return allUserEpisodes
     }
@@ -59,6 +81,7 @@ function playlistReducer(allUserPlaylists = [], action) {
                 return [...allUserPlaylists, action.payload]
             }
         case "UPDATE_PLAYLIST":
+            debugger 
             let copyOfAllUserPlaylists = [...allUserPlaylists]
 
             let foundPlaylist = copyOfAllUserPlaylists.find( ({id}) => id === action.payload.playlistObj.id)

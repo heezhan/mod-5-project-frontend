@@ -21,8 +21,9 @@ const destroyPlaylistEpisode = (playlistObj, episodeObj) => {
         })
         .then(resp => resp.json())
         .then(episode => {
+            console.log(episode)
             dispatch(removeEpisode(episode)) 
-
+            debugger 
             dispatch(updatePlaylist({episode, playlistObj}))
         })
     }
