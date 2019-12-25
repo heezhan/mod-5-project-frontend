@@ -32,9 +32,9 @@ const fetchEpisode = (playlistObj, episodeObj, id) => {
         .then(episode => { 
             dispatch(addEpisode(episode)) 
 
-            let found = episode.playlists.find( ({id}) => id === playlistObj.id )
-            debugger 
-            dispatch(addPlaylist(found))
+            let foundPlaylist = episode.playlists.find( ({id}) => id === playlistObj.id )
+             
+            dispatch(addPlaylist(foundPlaylist))
         })
     }
 }

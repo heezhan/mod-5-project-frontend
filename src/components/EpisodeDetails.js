@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Popup, Checkbox, Divider } from 'semantic-ui-react';
 import { fetchEpisode } from '../redux/actions/fetchEpisode';
 import { fetchPlaylist } from '../redux/actions/fetchPlaylist';
+import { destroyPlaylistEpisode } from '../redux/actions/destroyPlaylistEpisode';
 
 class EpisodeDetails extends React.Component {
     state = {
@@ -22,19 +23,28 @@ class EpisodeDetails extends React.Component {
     }
 
     toggleCheckbox = (playlistObj, episodeObj, id) => {  
+        // episodeObj.playlists.find( ({id}) => id === playlistObj.id )
 
-        if (this.state.selectedPlaylists.includes(playlistObj)) {
-            let updatedSelectedPlaylists = this.state.selectedPlaylists.filter(playlist => playlist.id !== playlistObj.id) 
-
-            this.setState({
-                selectedPlaylists: updatedSelectedPlaylists
-            })
-        } else { 
-            this.setState({
-                selectedPlaylists: [...this.state.selectedPlaylists, playlistObj]
-            })
+        if (episodeObj.playlists === undefined || episodeObj.playlists.find( ({id}) => id === playlistObj.id ) === undefined) { 
             this.props.fetchEpisode(playlistObj, episodeObj,id)
+        } else { 
+            this.props.destroyPlaylistEpisode(playlistObj, episodeObj, id)
         }
+        //comment out after this line
+        // if (episodeObj.playlists.find( ({id}) => id === playlistObj.id )) {
+        //     // let updatedSelectedPlaylists = this.state.selectedPlaylists.filter(playlist => playlist.id !== playlistObj.id) 
+
+        //     // this.setState({
+        //     //     selectedPlaylists: updatedSelectedPlaylists
+        //     // })
+
+        //     this.props.destroyPlaylistEpisode(playlistObj, episodeObj, id)
+        // } else { 
+        //     // this.setState({
+        //     //     selectedPlaylists: [...this.state.selectedPlaylists, playlistObj]
+        //     // })
+        //     this.props.fetchEpisode(playlistObj, episodeObj,id)
+        // }
     }
 
     renderPopup = (episodeObj, id) => { 
@@ -51,8 +61,10 @@ class EpisodeDetails extends React.Component {
                                 onChange={
                                     () => this.toggleCheckbox(playlistObj, episodeObj, id)
                                 }
-                                checked={this.state.selectedPlaylists.includes(playlistObj)}
+                                checked={playlistObj.episodes.find( ({id}) => id === episodeObj.id) ? (true) : (false)}
+
                                 // playlistObj.episodes.includes(episodeObj) 
+                                // playlistObj.episodes.find( ({id}) => id === episodeObj.id)
                             />
                         )}
                         < Divider />
@@ -147,7 +159,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         fetchEpisode: (playlistObj, episodeObj, id) => dispatch(fetchEpisode(playlistObj, episodeObj, id)),
-        fetchPlaylist: (playlistObj) => dispatch(fetchPlaylist(playlistObj))
+        fetchPlaylist: (playlistObj) => dispatch(fetchPlaylist(playlistObj)),
+        destroyPlaylistEpisode: (playlistObj, episodeObj, id) => dispatch(destroyPlaylistEpisode(playlistObj, episodeObj, id))
     }
 }
 
