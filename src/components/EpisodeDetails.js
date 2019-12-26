@@ -4,6 +4,7 @@ import { Button, Popup, Checkbox, Divider } from 'semantic-ui-react';
 import { fetchEpisode } from '../redux/actions/fetchEpisode';
 import { fetchPlaylist } from '../redux/actions/fetchPlaylist';
 import { destroyPlaylistEpisode } from '../redux/actions/destroyPlaylistEpisode';
+import { removeEpisode } from '../redux/actions/destroyPlaylistEpisode'
 
 class EpisodeDetails extends React.Component {
     state = {
@@ -115,14 +116,29 @@ class EpisodeDetails extends React.Component {
         let episodeObj
         let userEpisode = this.props.allUserEpisodes.find( ({api_id}) => api_id === this.props.apiId )
         let id 
-        
+        debugger
+
         if (userEpisode) {
-            episodeObj = userEpisode
+            if (this.props.allUserEpisodes.filter(episode => episode.api_id === userEpisode.api_id).length > 1) {
+                episodeObj = this.props.allUserEpisodes.find( episode => episode.playlists === undefined )
+                this.props.removeEpisode(episodeObj) 
+            } else {
+                episodeObj = userEpisode
+                debugger 
+            }
             id = episodeObj.api_id
         } else {
             episodeObj = this.props.searchResults.find( ({id}) => id === this.props.apiId )
             id = episodeObj.id
-        } 
+        }
+
+        // if (userEpisode) {
+        //     episodeObj = userEpisode
+        //     id = episodeObj.api_id
+        // } else {
+        //     episodeObj = this.props.searchResults.find( ({id}) => id === this.props.apiId )
+        //     id = episodeObj.id
+        // } 
 
         const {thumbnail, title_original, podcast_title_original, publisher_original, audio, description_original} = episodeObj 
 
@@ -160,7 +176,8 @@ function mapDispatchToProps(dispatch) {
     return {
         fetchEpisode: (playlistObj, episodeObj, id) => dispatch(fetchEpisode(playlistObj, episodeObj, id)),
         fetchPlaylist: (playlistObj) => dispatch(fetchPlaylist(playlistObj)),
-        destroyPlaylistEpisode: (playlistObj, episodeObj, id) => dispatch(destroyPlaylistEpisode(playlistObj, episodeObj, id))
+        destroyPlaylistEpisode: (playlistObj, episodeObj, id) => dispatch(destroyPlaylistEpisode(playlistObj, episodeObj, id)),
+        removeEpisode: (episode) => dispatch(removeEpisode(episode))
     }
 }
 

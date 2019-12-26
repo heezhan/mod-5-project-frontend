@@ -1,3 +1,7 @@
+const updateEpisode = (episode) => {
+    return {type: "UPDATE_EPISODE", payload: episode}
+}
+
 const removeEpisode = (episode) => {
     return {type: "REMOVE_EPISODE", payload: episode}
 }
@@ -21,12 +25,10 @@ const destroyPlaylistEpisode = (playlistObj, episodeObj) => {
         })
         .then(resp => resp.json())
         .then(episode => {
-            console.log(episode)
-            dispatch(removeEpisode(episode)) 
-            debugger 
+            dispatch(updateEpisode(episode))  
             dispatch(updatePlaylist({episode, playlistObj}))
         })
     }
 }
 
-export { removeEpisode, updatePlaylist, destroyPlaylistEpisode }
+export { updateEpisode, removeEpisode, updatePlaylist, destroyPlaylistEpisode }

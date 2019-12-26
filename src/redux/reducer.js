@@ -35,32 +35,38 @@ function episodeReducer(allUserEpisodes = [], action) {
             } else {
                 return [...allUserEpisodes, action.payload]
             }
-        case "REMOVE_EPISODE":
+        case "UPDATE_EPISODE":
             //if the episode is destroyed from the back end then 
             //go into the if statement and redirect (is this another fetch call?)
-            if (action.payload.playlists === undefined) {
+            
                 // let filteredAllUserEpisodes = allUserEpisodes.filter(episode => episode.id !== action.payload.id)  
                 
                 // debugger 
                 // return filteredAllUserEpisodes 
 
-                let copyOfAllUserEpisodes = [...allUserEpisodes]
+            let copyOfAllUserEpisodes = [...allUserEpisodes]
 
-                let foundEpisode = copyOfAllUserEpisodes.find( ({id}) => id === action.payload.id)
+            let foundEpisode = copyOfAllUserEpisodes.find( ({id}) => id === action.payload.id)
 
-                let index = copyOfAllUserEpisodes.indexOf(foundEpisode)
+            let index = copyOfAllUserEpisodes.indexOf(foundEpisode)
 
-                copyOfAllUserEpisodes.splice(index, 1, action.payload)
+            copyOfAllUserEpisodes.splice(index, 1, action.payload)
 
-                debugger 
-                return copyOfAllUserEpisodes
-            } else {
-                debugger
-                return allUserEpisodes
-            }
+     
+            return copyOfAllUserEpisodes
+           
             
             //if the episode still belongs to another playlist
             //replace the episode w the updated episode 
+        case "REMOVE_EPISODE":
+            let copyOfAllUserEpisodes2 = [...allUserEpisodes]
+
+            let index2 = allUserEpisodes.indexOf(action.payload)
+
+            copyOfAllUserEpisodes2.splice(index2, 1)
+
+            debugger
+            return copyOfAllUserEpisodes2
         default:
             return allUserEpisodes
     }
@@ -81,7 +87,7 @@ function playlistReducer(allUserPlaylists = [], action) {
                 return [...allUserPlaylists, action.payload]
             }
         case "UPDATE_PLAYLIST":
-            debugger 
+             
             let copyOfAllUserPlaylists = [...allUserPlaylists]
 
             let foundPlaylist = copyOfAllUserPlaylists.find( ({id}) => id === action.payload.playlistObj.id)
