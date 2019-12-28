@@ -8,15 +8,15 @@ const addCurrentUser = (userObj) => {
 const fetchCurrentUser = (userObj) => { 
     return (dispatch) => {
         fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-            username: userObj.username,
-            password: userObj.password
-        })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                username: userObj.username,
+                password: userObj.password
+            })
         })
         .then(resp => resp.json())
         .then(userObj => {

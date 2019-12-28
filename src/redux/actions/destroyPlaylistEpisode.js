@@ -13,15 +13,15 @@ const updatePlaylist = (playlist) => {
 const destroyPlaylistEpisode = (playlistObj, episodeObj) => { 
     return (dispatch) => {
         fetch(`http://localhost:3000/episodes/delete`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-            playlist_id: playlistObj.id,
-            episode_id: episodeObj.id
-        })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                playlist_id: playlistObj.id,
+                episode_id: episodeObj.id
+            })
         })
         .then(resp => resp.json())
         .then(episode => {

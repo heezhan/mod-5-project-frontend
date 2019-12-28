@@ -11,6 +11,8 @@ function searchResultsReducer(searchResults = [], action) {
         switch (action.type) {
             case "ADD_SEARCH_RESULTS":
                 return action.payload.results
+            case "CLEAR_SEARCH_RESULTS":
+                return action.payload
             default:
                 return searchResults
         }
@@ -19,6 +21,8 @@ function searchResultsReducer(searchResults = [], action) {
 function  currentUserReducer(currentUser = null, action) {
     switch(action.type) {
         case "ADD_CURRENT_USER":
+            return action.payload
+        case "ADD_NEW_CURRENT_USER":
             return action.payload
         default:
             return currentUser
@@ -36,14 +40,6 @@ function episodeReducer(allUserEpisodes = [], action) {
                 return [...allUserEpisodes, action.payload]
             }
         case "UPDATE_EPISODE":
-            //if the episode is destroyed from the back end then 
-            //go into the if statement and redirect (is this another fetch call?)
-            
-                // let filteredAllUserEpisodes = allUserEpisodes.filter(episode => episode.id !== action.payload.id)  
-                
-                // debugger 
-                // return filteredAllUserEpisodes 
-
             let copyOfAllUserEpisodes = [...allUserEpisodes]
 
             let foundEpisode = copyOfAllUserEpisodes.find( ({id}) => id === action.payload.id)
@@ -54,10 +50,6 @@ function episodeReducer(allUserEpisodes = [], action) {
 
      
             return copyOfAllUserEpisodes
-           
-            
-            //if the episode still belongs to another playlist
-            //replace the episode w the updated episode 
         case "REMOVE_EPISODE":
             let copyOfAllUserEpisodes2 = [...allUserEpisodes]
 

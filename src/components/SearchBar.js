@@ -8,10 +8,6 @@ class SearchBar extends React.Component {
         query: ""
     }
 
-    componentDidMount() {
-        // dispatch an action to clear state for searchResults
-    }
-
     onChangeSearch = (event) => {
         this.setState({
             query: event.target.value

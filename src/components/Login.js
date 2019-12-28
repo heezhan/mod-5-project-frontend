@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCurrentUser } from '../redux/actions/fetchCurrentUser';
 import { Segment, Button, Form, Input, Divider } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { fetchCurrentUser } from '../redux/actions/fetchCurrentUser';
 
 class Login extends React.Component {
     state = {
@@ -20,8 +21,8 @@ class Login extends React.Component {
             <div className="login-page">
                 <Segment basic textAlign='center'>
                     <Form 
-                    size="large"
-                    onSubmit={() => this.props.fetchCurrentUser(this.state)}>
+                        size="large"
+                        onSubmit={() => this.props.fetchCurrentUser(this.state)}>
                         <Input 
                             type="text"
                             icon="user"
@@ -54,10 +55,12 @@ class Login extends React.Component {
                     <Divider horizontal>Or</Divider>
                     <br/>
                     
-                    <Button 
-                        type="click"
-                        content="Sign Up for Podcastr"
-                    />
+                    <Link to={"/signup"}>
+                        <Button 
+                            type="click"
+                            content="Sign Up for Podcastr"
+                        />
+                    </Link>
                 </Segment>
             </div>
         )

@@ -2,12 +2,16 @@ const addSearchResults = (searchResults) => {
     return {type: "ADD_SEARCH_RESULTS", payload: searchResults}
 }
 
+const clearSearchResults = (emptyArr) => {
+    return {type: "CLEAR_SEARCH_RESULTS", payload: emptyArr}
+}
+
 const fetchSearchResults = (query) => {
     return (dispatch) => {
         fetch("http://localhost:3000/search", {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             body: JSON.stringify({
@@ -21,5 +25,5 @@ const fetchSearchResults = (query) => {
     }
 }
 
-export { addSearchResults, fetchSearchResults }
+export { addSearchResults, clearSearchResults, fetchSearchResults }
 

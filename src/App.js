@@ -11,6 +11,7 @@ import EpisodeDetails from './components/EpisodeDetails';
 import Login from './components/Login';
 import PlaylistsContainer from './containers/PlaylistsContainer';
 import PlaylistDetails from './components/PlaylistDetails';
+import Signup from './components/Signup';
 
 class App extends React.Component {
 
@@ -23,18 +24,18 @@ class App extends React.Component {
         </Sticky>
 
         < Route exact path="/" >
-  
           < SearchBar />
-
-          {/* implement a search route */}
           < FiltersContainer />
           < EpisodesContainer />
-
         </ Route >
 
         < Route exact path="/login" >
             < Login />
         </ Route >
+
+        < Route exact path="/signup">
+          < Signup />
+        </Route>
 
         {this.props.currentUser ? (
           <>
@@ -54,7 +55,7 @@ class App extends React.Component {
             />
           </>
         ) : (
-          < Redirect to={"/"} />
+          null
         ) }
         
         {this.props.searchResults.length > 0 || this.props.allUserPlaylists.length > 0 ? 
@@ -67,7 +68,7 @@ class App extends React.Component {
             }
           } />
         ) : (
-          < Redirect to ='/' />
+          null
         )
         }
 
