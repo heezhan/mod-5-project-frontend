@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrentUser } from '../redux/actions/fetchCurrentUser';
-import { Segment, Button, Form, Input } from 'semantic-ui-react';
+import { Segment, Button, Form, Input, Divider } from 'semantic-ui-react';
 
 class Login extends React.Component {
     state = {
@@ -17,7 +17,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="login-page">
                 <Segment basic textAlign='center'>
                     <Form 
                     size="large"
@@ -49,6 +49,15 @@ class Login extends React.Component {
                             content="Login"
                         />
                     </Form>
+
+                    <br/>
+                    <Divider horizontal>Or</Divider>
+                    <br/>
+                    
+                    <Button 
+                        type="click"
+                        content="Sign Up for Podcastr"
+                    />
                 </Segment>
             </div>
         )

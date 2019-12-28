@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class NavBar extends React.Component {
     render() {
         return (
-            <div className="ui inverted segment">
+            <div className="navbar ui inverted segment">
                 <div className="ui inverted secondary menu">
 
                     <Link to='/'>
@@ -14,9 +14,11 @@ class NavBar extends React.Component {
                         </a>
                     </Link>
 
-                    <a className="item">
-                        About
-                    </a>
+                    <Link to='/about'>
+                        <a className="item">
+                            About
+                        </a>
+                    </Link>
 
                     {this.props.currentUser ? (
                         <Link to='/playlists'>

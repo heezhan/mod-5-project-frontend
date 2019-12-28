@@ -65,7 +65,6 @@ function episodeReducer(allUserEpisodes = [], action) {
 
             copyOfAllUserEpisodes2.splice(index2, 1)
 
-            debugger
             return copyOfAllUserEpisodes2
         default:
             return allUserEpisodes

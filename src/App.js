@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Sticky } from 'semantic-ui-react'
 import './App.css';
 import NavBar from './components/NavBar'
 import SearchBar from './components/SearchBar';
@@ -17,40 +18,58 @@ class App extends React.Component {
     return (
       <div className="App">
 
-        < NavBar />
+        <Sticky>
+          < NavBar />
+        </Sticky>
 
-        <Route exact path="/">
+        < Route exact path="/" >
+  
           < SearchBar />
+
+          {/* implement a search route */}
           < FiltersContainer />
           < EpisodesContainer />
-        </Route>
-   
-        <Route exact path="/login">
-          < Login />
-        </Route>
 
-        {this.props.currentUser ? < Redirect to={"/playlists"} /> : null }
+        </ Route >
 
-        <Route exact path="/playlists">
-          <PlaylistsContainer />
-        </Route>
+        < Route exact path="/login" >
+            < Login />
+        </ Route >
+
+        {this.props.currentUser ? (
+          <>
+            < Redirect to={"/playlists"} />
+            
+            < Route exact path="/playlists" >
+              < PlaylistsContainer />
+            </ Route >
+          
+            < Route exact path="/playlists/:id" 
+              render={
+                (props) => { 
+                  const id = parseInt(props.match.params.id)
+                  return < PlaylistDetails id={id} />
+                }
+              } 
+            />
+          </>
+        ) : (
+          < Redirect to={"/"} />
+        ) }
         
-        <Route exact path="/playlists/:id" 
-          render={
-            (props) => { 
-              const id = parseInt(props.match.params.id)
-              return < PlaylistDetails id={id}/>
+        {this.props.searchResults.length > 0 || this.props.allUserPlaylists.length > 0 ? 
+        (
+          < Route exact path="/episodes/:id" render={
+            (props) => 
+            { 
+              const apiId = props.match.params.id  
+              return <EpisodeDetails apiId={apiId} />
             }
-          } 
-        />
-
-        <Route exact path="/episodes/:id" render={
-          (props) => 
-          { 
-            const apiId = props.match.params.id  
-            return <EpisodeDetails apiId={apiId} />
-          }
-        }/>
+          } />
+        ) : (
+          < Redirect to ='/' />
+        )
+        }
 
       </div>
     )
@@ -58,7 +77,11 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { currentUser: state.currentUser }
+  return { 
+    currentUser: state.currentUser,
+    searchResults: state.searchResults,
+    allUserPlaylists: state.allUserPlaylists
+  }
 }
 
 export default connect(mapStateToProps)(App);

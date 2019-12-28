@@ -24,28 +24,11 @@ class EpisodeDetails extends React.Component {
     }
 
     toggleCheckbox = (playlistObj, episodeObj, id) => {  
-        // episodeObj.playlists.find( ({id}) => id === playlistObj.id )
-
         if (episodeObj.playlists === undefined || episodeObj.playlists.find( ({id}) => id === playlistObj.id ) === undefined) { 
             this.props.fetchEpisode(playlistObj, episodeObj,id)
         } else { 
             this.props.destroyPlaylistEpisode(playlistObj, episodeObj, id)
         }
-        //comment out after this line
-        // if (episodeObj.playlists.find( ({id}) => id === playlistObj.id )) {
-        //     // let updatedSelectedPlaylists = this.state.selectedPlaylists.filter(playlist => playlist.id !== playlistObj.id) 
-
-        //     // this.setState({
-        //     //     selectedPlaylists: updatedSelectedPlaylists
-        //     // })
-
-        //     this.props.destroyPlaylistEpisode(playlistObj, episodeObj, id)
-        // } else { 
-        //     // this.setState({
-        //     //     selectedPlaylists: [...this.state.selectedPlaylists, playlistObj]
-        //     // })
-        //     this.props.fetchEpisode(playlistObj, episodeObj,id)
-        // }
     }
 
     renderPopup = (episodeObj, id) => { 
@@ -63,9 +46,6 @@ class EpisodeDetails extends React.Component {
                                     () => this.toggleCheckbox(playlistObj, episodeObj, id)
                                 }
                                 checked={playlistObj.episodes.find( ({id}) => id === episodeObj.id) ? (true) : (false)}
-
-                                // playlistObj.episodes.includes(episodeObj) 
-                                // playlistObj.episodes.find( ({id}) => id === episodeObj.id)
                             />
                         )}
                         < Divider />
@@ -116,29 +96,19 @@ class EpisodeDetails extends React.Component {
         let episodeObj
         let userEpisode = this.props.allUserEpisodes.find( ({api_id}) => api_id === this.props.apiId )
         let id 
-        debugger
 
         if (userEpisode) {
             if (this.props.allUserEpisodes.filter(episode => episode.api_id === userEpisode.api_id).length > 1) {
                 episodeObj = this.props.allUserEpisodes.find( episode => episode.playlists === undefined )
                 this.props.removeEpisode(episodeObj) 
             } else {
-                episodeObj = userEpisode
-                debugger 
+                episodeObj = userEpisode 
             }
             id = episodeObj.api_id
         } else {
             episodeObj = this.props.searchResults.find( ({id}) => id === this.props.apiId )
             id = episodeObj.id
         }
-
-        // if (userEpisode) {
-        //     episodeObj = userEpisode
-        //     id = episodeObj.api_id
-        // } else {
-        //     episodeObj = this.props.searchResults.find( ({id}) => id === this.props.apiId )
-        //     id = episodeObj.id
-        // } 
 
         const {thumbnail, title_original, podcast_title_original, publisher_original, audio, description_original} = episodeObj 
 

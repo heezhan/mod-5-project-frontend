@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSearchResults } from '../redux/actions/fetchSearchResults';
+import { Search } from 'semantic-ui-react'
 
 class SearchBar extends React.Component {
     state = {
@@ -26,14 +27,17 @@ class SearchBar extends React.Component {
         return (
             <div>
                 <form onSubmit={this.searchHandler}>
-                    <div className="ui huge icon input">
-                            <input 
-                                type="text" 
-                                placeholder="Search"
-                                value={this.state.query} 
-                                onChange={this.onChangeSearch} 
-                            />
-                        <i className="search icon" />
+                    <div className="ui search">
+                            <div className="ui huge left icon input">
+                                <input 
+                                    className="prompt"
+                                    type="text" 
+                                    placeholder="Search by episodes or podcasts"
+                                    value={this.state.query} 
+                                    onChange={this.onChangeSearch} 
+                                />
+                                <i className="search icon"/>
+                            </div>
                     </div>
                 </form>
             </div>

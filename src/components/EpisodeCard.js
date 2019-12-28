@@ -6,7 +6,7 @@ class EpisodeCard extends React.Component {
         const {id, thumbnail, title_original, podcast_title_original, publisher_original, audio} = this.props.episodeObj
         
         return (
-            <div className="ui card four wide column margin-class">
+            <div className="episode-card">
                 <img className="ui centered small image" src={thumbnail} />
                 <div className="content">
                     <Link to={`/episodes/${id}`}>
