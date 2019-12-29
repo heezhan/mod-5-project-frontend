@@ -4,6 +4,10 @@ const addEpisode = (episode) => {
     return {type: "ADD_EPISODE", payload: episode}
 }
 
+const removeAllEpisodes = (emptyArray) => {
+    return {type: "REMOVE_ALL_EPISODES", payload: emptyArray}
+}
+
 const fetchEpisode = (playlistObj, episodeObj, id) => {
     let {podcast_id, thumbnail, image, podcast_title_original, title_original, publisher_original, description_original, audio} = episodeObj 
 
@@ -39,4 +43,4 @@ const fetchEpisode = (playlistObj, episodeObj, id) => {
     }
 }
 
-export { addEpisode, fetchEpisode } 
+export { addEpisode, removeAllEpisodes, fetchEpisode } 

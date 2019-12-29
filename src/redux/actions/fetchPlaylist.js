@@ -2,6 +2,10 @@ const addPlaylist = (playlist) => {
     return {type: "ADD_PLAYLIST", payload: playlist}
 }
 
+const removeAllPlaylists = (emptyArray) => {
+    return {type: "REMOVE_ALL_PLAYLISTS", payload: emptyArray}
+}
+
 const fetchPlaylist = (playlistObj) => { 
     return (dispatch) => {
         fetch("http://localhost:3000/playlist", {
@@ -20,4 +24,4 @@ const fetchPlaylist = (playlistObj) => {
     }
 }
 
-export { addPlaylist, fetchPlaylist }
+export { addPlaylist, removeAllPlaylists, fetchPlaylist }

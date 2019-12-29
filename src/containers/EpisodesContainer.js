@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { clearSearchResults } from '../redux/actions/fetchSearchResults';
+import { removeSearchResults } from '../redux/actions/fetchSearchResults';
 import EpisodeCard from '../components/EpisodeCard'
 
 
 class EpisodesContainer extends React.Component {
     componentDidMount() {
-        this.props.clearSearchResults([])
+        this.props.removeSearchResults([])
     }
 
     render() {
@@ -31,7 +31,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        clearSearchResults: (emptyArr) => dispatch(clearSearchResults(emptyArr))
+        removeSearchResults: (emptyArray) => dispatch(removeSearchResults(emptyArray))
     }
 }
 

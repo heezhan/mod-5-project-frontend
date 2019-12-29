@@ -1,31 +1,40 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { removeCurrentUser } from '../redux/actions/fetchCurrentUser';
+import { removeAllEpisodes } from '../redux/actions/fetchEpisode';
+import { removeAllPlaylists} from '../redux/actions/fetchPlaylist';
 
 class NavBar extends React.Component {
+    handleLogout = () => {
+        this.props.removeCurrentUser(null)
+        this.props.removeAllEpisodes([])
+        this.props.removeAllPlaylists([])
+    }
+
     render() {
         return (
             <div className="navbar ui inverted segment">
                 <div className="ui inverted secondary menu">
 
-                    <Link to='/'>
+                    < Link to='/' >
                         <a className="item">
                             Home
                         </a>
-                    </Link>
+                    </ Link >
 
-                    <Link to='/about'>
+                    < Link to='/about' >
                         <a className="item">
                             About
                         </a>
-                    </Link>
+                    </ Link >
 
                     {this.props.currentUser ? (
-                        <Link to='/playlists'>
+                        < Link to='/playlists' >
                             <a className="item">
                                 My Playlists 
                             </a>
-                        </Link>
+                        </ Link >
                     ) : (
                         null
                     )}
@@ -33,17 +42,27 @@ class NavBar extends React.Component {
 
                     <div className="right menu">
                         {this.props.currentUser ? (
-                        // dispatch an action to set the currentUser state to null
-                                <a className="item">
+                            < Link to="/" >
+                                <a 
+                                    className="item" 
+                                    onClick={this.handleLogout}>
                                     Logout
                                 </a>
-
+                            </ Link >
                         ) : (
-                            <Link to="/login">
-                                <a className="item">
-                                    Login
-                                </a>
-                            </Link>
+                            <>
+                                < Link to="/signup" >
+                                    <a className="item">
+                                        Sign up 
+                                    </a>
+                                </ Link >
+    
+                                < Link to="/login" >
+                                    <a className="item">
+                                        Log in
+                                    </a>
+                                </ Link >
+                            </>
                         )}
                     </div>
                     
@@ -59,4 +78,12 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(NavBar)
+function mapDispatchToProps(dispatch) {
+    return {
+        removeCurrentUser: (nullUser) => dispatch(removeCurrentUser(nullUser)),
+        removeAllEpisodes: (emptyArray) => dispatch(removeAllEpisodes(emptyArray)),
+        removeAllPlaylists: (emptyArray) => dispatch(removeAllPlaylists(emptyArray))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

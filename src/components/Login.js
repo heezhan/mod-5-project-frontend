@@ -52,9 +52,11 @@ class Login extends React.Component {
                     </Form>
 
                     <br/>
-                    <Divider horizontal>Or</Divider>
-                    <br/>
-                    
+                    < Divider />
+
+                    <h4>
+                        Don't have an account?
+                    </h4>
                     <Link to={"/signup"}>
                         <Button 
                             type="click"

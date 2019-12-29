@@ -12,7 +12,7 @@ const updatePlaylist = (playlist) => {
 
 const destroyPlaylistEpisode = (playlistObj, episodeObj) => { 
     return (dispatch) => {
-        fetch(`http://localhost:3000/episodes/delete`, {
+        fetch(`http://localhost:3000/episodes/destroy`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

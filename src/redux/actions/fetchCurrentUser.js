@@ -5,6 +5,10 @@ const addCurrentUser = (userObj) => {
     return {type: "ADD_CURRENT_USER", payload: userObj}
 }
 
+const removeCurrentUser = (nullUser) => {
+    return {type: "REMOVE_CURRENT_USER", payload: nullUser}
+}
+
 const fetchCurrentUser = (userObj) => { 
     return (dispatch) => {
         fetch("http://localhost:3000/login", {
@@ -33,4 +37,4 @@ const fetchCurrentUser = (userObj) => {
     }
 }
 
-export { addCurrentUser, fetchCurrentUser }
+export { addCurrentUser, removeCurrentUser, fetchCurrentUser }

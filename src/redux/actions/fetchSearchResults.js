@@ -2,8 +2,8 @@ const addSearchResults = (searchResults) => {
     return {type: "ADD_SEARCH_RESULTS", payload: searchResults}
 }
 
-const clearSearchResults = (emptyArr) => {
-    return {type: "CLEAR_SEARCH_RESULTS", payload: emptyArr}
+const removeSearchResults = (emptyArray) => {
+    return {type: "REMOVE_SEARCH_RESULTS", payload: emptyArray}
 }
 
 const fetchSearchResults = (query) => {
@@ -25,5 +25,5 @@ const fetchSearchResults = (query) => {
     }
 }
 
-export { addSearchResults, clearSearchResults, fetchSearchResults }
+export { addSearchResults, removeSearchResults, fetchSearchResults }
 
