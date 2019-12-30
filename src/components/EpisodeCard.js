@@ -7,7 +7,7 @@ class EpisodeCard extends React.Component {
         
         return (
             <div className="episode-card">
-                <img className="ui centered small image" src={thumbnail} />
+                <img className="ui centered small image" src={thumbnail} alt="thumbnail" />
                 <div className="content">
                     <Link to={`/episodes/${id}`}>
                         <div className="header">

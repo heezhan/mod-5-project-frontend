@@ -62,12 +62,16 @@
 
 .container {
   display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 50% 50%;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: auto auto;
   grid-column-gap: 16px;
   grid-row-gap: 16px;
+  align-items: center;
 }
 
 .episode-card {
   background-color: #404040;
+  border-radius: 31px;
+  padding: 5%;
+  width: auto;
 }

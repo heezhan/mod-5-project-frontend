@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Header, Icon, Modal, Input } from 'semantic-ui-react';
+import { Button, Header, Icon, Modal, Input } from 'semantic-ui-react'; 
 import { destroyPlaylist } from '../redux/actions/destroyPlaylist';
 import { updatePlaylist } from '../redux/actions/editPlaylist';
 
@@ -68,8 +68,7 @@ class PlaylistDetails extends React.Component {
                         < Modal.Actions >
                             <center>
                                 < Button 
-                                    basic color="white"
-                                    inverted 
+                                    basic inverted
                                     icon="remove"
                                     content="Cancel"
                                 />

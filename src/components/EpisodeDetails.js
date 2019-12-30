@@ -110,7 +110,7 @@ class EpisodeDetails extends React.Component {
             id = episodeObj.id
         }
 
-        const {thumbnail, title_original, podcast_title_original, publisher_original, audio, description_original} = episodeObj 
+        const {title_original, podcast_title_original, publisher_original, audio, description_original} = episodeObj 
 
         return (
             <div>

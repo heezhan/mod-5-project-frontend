@@ -1,24 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeSearchResults } from '../redux/actions/fetchSearchResults';
+import { withRouter } from 'react-router-dom';
+import { removeSearchResults, fetchSearchResults } from '../redux/actions/fetchSearchResults';
 import EpisodeCard from '../components/EpisodeCard'
-import FiltersContainer from './FiltersContainer'
-
 
 class EpisodesContainer extends React.Component {
-    // componentDidMount() {
-    //     this.props.removeSearchResults([])
-    // }
+    componentDidMount() {
+        this.props.fetchSearchResults(this.props.match.params.query)
+    }
 
     render() {
         return (
-            <div className="container">
-                {this.props.searchResults.map(episodeObj => 
-                    <EpisodeCard 
-                        key={episodeObj.id}
-                        episodeObj={episodeObj}
-                    />
-                )}
+            <div>
+                < br />
+                <div className="container">
+                    {this.props.searchResults.map(episodeObj => 
+                        <EpisodeCard 
+                            key={episodeObj.id}
+                            episodeObj={episodeObj}
+                        />
+                    )}
+                </div>
             </div>
         )
     }
@@ -32,8 +34,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        removeSearchResults: (emptyArray) => dispatch(removeSearchResults(emptyArray))
+        removeSearchResults: (emptyArray) => dispatch(removeSearchResults(emptyArray)),
+        fetchSearchResults:(query) => dispatch(fetchSearchResults(query))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EpisodesContainer)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EpisodesContainer))

@@ -12,9 +12,17 @@ import Login from './components/Login';
 import PlaylistsContainer from './containers/PlaylistsContainer';
 import PlaylistDetails from './components/PlaylistDetails';
 import Signup from './components/Signup';
-import SearchBar2 from './components/SearchBar2'
 
 class App extends React.Component {
+  state = {
+    activeFilter: "episodes"
+  }
+
+  handleFilterClick = (event) => {
+    this.setState({
+      activeFilter: event.target.name
+    })
+  }
 
   render() {
     return (
@@ -26,6 +34,15 @@ class App extends React.Component {
 
         < Route exact path="/">
           < SearchBar />
+        </Route>
+
+        < Route exact path="/search/:query">
+          < SearchBar />
+          < FiltersContainer 
+            activeFilter={this.state.activeFilter} 
+            handleFilterClick={this.handleFilterClick}
+          />
+          < EpisodesContainer />
         </Route>
 
         < Route exact path="/login" >
@@ -60,12 +77,6 @@ class App extends React.Component {
         {this.props.searchResults.length > 0 || this.props.allUserPlaylists.length > 0 ? 
         (
           <>
-            <Route exact path="/search/:query">
-              < SearchBar2 />
-              < FiltersContainer />
-              < EpisodesContainer />
-            </Route>
-
             < Route exact path="/episodes/:id" render={
               (props) => 
               { 
