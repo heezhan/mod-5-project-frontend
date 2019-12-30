@@ -48,8 +48,8 @@
   width: 15vw !important;
 }
 
-.navbar {
-  opacity: 0.7;
+.opacity {
+  opacity: 0.7 !important;
 }
 
 .navbar-buttons {

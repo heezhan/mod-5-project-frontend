@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { removeSearchResults } from '../redux/actions/fetchSearchResults';
 import EpisodeCard from '../components/EpisodeCard'
+import FiltersContainer from './FiltersContainer'
 
 
 class EpisodesContainer extends React.Component {
-    componentDidMount() {
-        this.props.removeSearchResults([])
-    }
+    // componentDidMount() {
+    //     this.props.removeSearchResults([])
+    // }
 
     render() {
         return (

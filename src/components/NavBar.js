@@ -4,9 +4,27 @@ import { connect } from 'react-redux';
 import { removeCurrentUser } from '../redux/actions/fetchCurrentUser';
 import { removeAllEpisodes } from '../redux/actions/fetchEpisode';
 import { removeAllPlaylists} from '../redux/actions/fetchPlaylist';
+import { removeSearchResults } from '../redux/actions/fetchSearchResults'
+import { Segment, Menu } from 'semantic-ui-react';
 
 class NavBar extends React.Component {
-    handleLogout = () => {
+    state = {
+        activeItem: ""
+    }
+
+    handleItemClick = (event) => { 
+        this.setState({
+            activeItem: event.target.text
+        })
+    }
+    
+    handleHomeButton = (event) => {
+        this.handleItemClick(event)
+        this.props.removeSearchResults([])
+    }
+
+    handleLogout = (event) => {
+        this.handleItemClick(event)
         this.props.removeCurrentUser(null)
         this.props.removeAllEpisodes([])
         this.props.removeAllPlaylists([])
@@ -14,60 +32,69 @@ class NavBar extends React.Component {
 
     render() {
         return (
-            <div className="navbar ui inverted segment">
-                <div className="ui inverted secondary menu">
+            < Segment inverted >
+                < Menu inverted secondary >
 
-                    < Link to='/' >
-                        <a className="item">
-                            Home
-                        </a>
+                    < Link to="/" >
+                        < Menu.Item 
+                            content="Home"
+                            active={this.state.activeItem === "Home"}
+                            onClick={(event) => this.handleHomeButton(event)}
+                        />
                     </ Link >
 
-                    < Link to='/about' >
-                        <a className="item">
-                            About
-                        </a>
+                    < Link to="/about" >
+                        < Menu.Item 
+                            content="About"
+                            active={this.state.activeItem === "About"}
+                            onClick={this.handleItemClick}
+                        />
                     </ Link >
 
                     {this.props.currentUser ? (
-                        < Link to='/playlists' >
-                            <a className="item">
-                                My Playlists 
-                            </a>
+                        < Link to="/playlists" >
+                            < Menu.Item 
+                                content="My Playlists"
+                                active={this.state.activeItem === "My Playlists"}
+                                onClick={(event) => this.handleItemClick(event)}
+                            />
                         </ Link >
                     ) : (
                         null
                     )}
-                    
 
                     <div className="right menu">
                         {this.props.currentUser ? (
                             < Link to="/" >
-                                <a 
-                                    className="item" 
-                                    onClick={this.handleLogout}>
-                                    Logout
-                                </a>
+                                < Menu.Item 
+                                    content="Log Out"
+                                    active={this.state.activeItem === "Log Out"}
+                                    onClick={this.handleLogout}
+                                />
                             </ Link >
                         ) : (
                             <>
                                 < Link to="/signup" >
-                                    <a className="item">
-                                        Sign up 
-                                    </a>
+                                    < Menu.Item 
+                                        content="Sign Up"
+                                        active={this.state.activeItem === "Sign Up"}
+                                        onClick={this.handleItemClick}
+                                    />
                                 </ Link >
     
                                 < Link to="/login" >
-                                    <a className="item">
-                                        Log in
-                                    </a>
+                                    < Menu.Item 
+                                        content="Log In"
+                                        active={this.state.activeItem === "Log In"}
+                                        onClick={this.handleItemClick}
+                                    />
                                 </ Link >
                             </>
                         )}
                     </div>
                     
-                </div>
-            </div>
+                </ Menu >
+            </ Segment >
         )
     }
 }
@@ -82,7 +109,8 @@ function mapDispatchToProps(dispatch) {
     return {
         removeCurrentUser: (nullUser) => dispatch(removeCurrentUser(nullUser)),
         removeAllEpisodes: (emptyArray) => dispatch(removeAllEpisodes(emptyArray)),
-        removeAllPlaylists: (emptyArray) => dispatch(removeAllPlaylists(emptyArray))
+        removeAllPlaylists: (emptyArray) => dispatch(removeAllPlaylists(emptyArray)),
+        removeSearchResults: (emptyArray) => dispatch(removeSearchResults(emptyArray))
     }
 }
 

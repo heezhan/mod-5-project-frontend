@@ -33,56 +33,61 @@ class PlaylistDetails extends React.Component {
         return (
             <div>
                 <h1>
-                    {foundPlaylist.title}
-                </h1>
+                    {foundPlaylist.title} &nbsp;
                     < Modal 
-                    trigger={
-                        < Button >
-                            < Button.Content onClick={null}>
-                                < Icon name="pencil alternate" />
-                            </ Button.Content >
-                        </ Button >
-                    } 
-                    basic size="small"
-                    closeIcon
+                        trigger={
+                            < Button 
+                                circular icon="pencil alternate"
+                                basic inverted color="yellow"
+                            />
+                        } 
+                        basic size="small"
+                        closeIcon
                     >
                         < Header 
-                            icon='pencil alternate' 
+                            icon="pencil alternate"
                         />
 
                         < Modal.Content >
-                            <h2>
-                                Give it a new name
-                            </h2>
-                            <Input 
-                                type="text"
-                                name="title" 
-                                value={this.state.title} 
-                                onChange={this.onChangeTitle}
-                            />
+                            <center>
+                                <h2>
+                                    Give it a new name
+                                </h2>
+                           
+                                <Input 
+                                    size="big"
+                                    type="text"
+                                    name="title" 
+                                    value={this.state.title} 
+                                    onChange={this.onChangeTitle}
+                                />
+                            </center>
                         </ Modal.Content >
 
+                      
                         < Modal.Actions >
-                            < Button 
-                                basic color='white'
-                                inverted 
-                            >
-                                < Icon name='remove' /> 
-                                Cancel
-                            </ Button >
-
-                            <Link to="/playlists">
+                            <center>
                                 < Button 
-                                    color='green'
-                                    inverted
-                                    onClick={() => this.handleEdit(playlistId, this.state.title)}
-                                >
-                                    < Icon name='checkmark' /> 
-                                    Edit
-                                </ Button >
-                            </Link>
+                                    basic color="white"
+                                    inverted 
+                                    icon="remove"
+                                    content="Cancel"
+                                />
+                            
+                                {/* have it link to its show page  */}
+                                <Link to="/playlists">
+                                    < Button 
+                                        color="green"
+                                        inverted
+                                        icon="checkmark"
+                                        content="Edit"
+                                        onClick={() => this.handleEdit(playlistId, this.state.title)}
+                                    />
+                                </Link>
+                            </center>
                         </ Modal.Actions >
                     </ Modal >
+                </h1>
                 {
                     foundPlaylist.episodes.map(
                         episode => 
@@ -95,7 +100,7 @@ class PlaylistDetails extends React.Component {
                 
                 < Modal 
                     trigger={
-                        < Button animated="vertical" >
+                        < Button basic color="white" inverted animated="vertical" >
                             < Button.Content hidden >
                                 Delete
                             </ Button.Content >
@@ -108,34 +113,38 @@ class PlaylistDetails extends React.Component {
                     closeIcon
                 >
                     < Header 
-                        icon='trash alternate' 
+                        icon="trash alternate"
                     />
 
                     < Modal.Content >
-                        <h2>
-                            Are you sure you want to delete this playlist?
-                        </h2>
+                        <center>
+                            <h2>
+                                Are you sure you want to delete this playlist?
+                            </h2>
+                        </center>
                     </ Modal.Content >
-
+                    
                     < Modal.Actions >
-                        < Button 
-                            basic color='white'
-                            inverted 
-                        >
-                            < Icon name='remove' /> 
-                            Cancel
-                        </ Button >
-
-                        <Link to="/playlists">
+                        <center>
                             < Button 
-                                color='green'
-                                inverted
-                                onClick={() => this.handleDelete(foundPlaylist)}
+                                basic color="white"
+                                inverted 
                             >
-                                < Icon name='checkmark' /> 
-                                Delete
+                                < Icon name="remove" /> 
+                                Cancel
                             </ Button >
-                        </Link>
+    
+                            <Link to="/playlists">
+                                < Button 
+                                    color="green"
+                                    inverted
+                                    onClick={() => this.handleDelete(foundPlaylist)}
+                                >
+                                    < Icon name="checkmark" /> 
+                                    Delete
+                                </ Button >
+                            </Link>
+                        </center>
                     </ Modal.Actions >
                 </ Modal >
             </div>

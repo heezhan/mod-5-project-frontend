@@ -12,6 +12,7 @@ import Login from './components/Login';
 import PlaylistsContainer from './containers/PlaylistsContainer';
 import PlaylistDetails from './components/PlaylistDetails';
 import Signup from './components/Signup';
+import SearchBar2 from './components/SearchBar2'
 
 class App extends React.Component {
 
@@ -23,11 +24,9 @@ class App extends React.Component {
           < NavBar />
         </Sticky>
 
-        < Route exact path="/" >
+        < Route exact path="/">
           < SearchBar />
-          < FiltersContainer />
-          < EpisodesContainer />
-        </ Route >
+        </Route>
 
         < Route exact path="/login" >
             < Login />
@@ -60,13 +59,21 @@ class App extends React.Component {
         
         {this.props.searchResults.length > 0 || this.props.allUserPlaylists.length > 0 ? 
         (
-          < Route exact path="/episodes/:id" render={
-            (props) => 
-            { 
-              const apiId = props.match.params.id  
-              return <EpisodeDetails apiId={apiId} />
-            }
-          } />
+          <>
+            <Route exact path="/search/:query">
+              < SearchBar2 />
+              < FiltersContainer />
+              < EpisodesContainer />
+            </Route>
+
+            < Route exact path="/episodes/:id" render={
+              (props) => 
+              { 
+                const apiId = props.match.params.id  
+                return <EpisodeDetails apiId={apiId} />
+              }
+            } />
+          </>
         ) : (
           null
         )

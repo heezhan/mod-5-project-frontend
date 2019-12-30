@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import { fetchSearchResults } from '../redux/actions/fetchSearchResults';
 
-class SearchBar extends React.Component {
+class SearchBar2 extends React.Component {
     state = {
-        query: "", 
-        toSearch: false 
+        query: ""
     }
 
     onChangeSearch = (event) => {
@@ -18,16 +17,9 @@ class SearchBar extends React.Component {
     searchHandler = (event) => {
         event.preventDefault()
         this.props.fetchSearchResults(this.state.query)
-        this.setState({
-            toSearch: true 
-        })
     }
 
     render() {
-        if (this.state.toSearch) {
-            return < Redirect to={`/search/${this.state.query}`} />
-        }
-
         return (
             <div>
                 <form onSubmit={this.searchHandler}>
@@ -55,4 +47,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar)
+export default connect(null, mapDispatchToProps)(SearchBar2)
