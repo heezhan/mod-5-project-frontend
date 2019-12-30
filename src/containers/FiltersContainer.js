@@ -3,6 +3,7 @@ import { Button } from 'semantic-ui-react'
 
 class FiltersContainer extends React.Component {
     render() {
+     
         return (
             <div>
                 < br />
@@ -10,14 +11,14 @@ class FiltersContainer extends React.Component {
                     basic inverted 
                     content="Episodes"
                     name="episodes"
-                    active={this.props.activeFilter === "episodes"}
+                    toggle active={this.props.activeFilter === "episodes"}
                     onClick={this.props.handleFilterClick}
                 />
                 < Button 
                     basic inverted
                     content="Podcasts"
                     name="podcasts"
-                    active={this.props.activeFilter === "podcasts"}
+                    toggle active={this.props.activeFilter === "podcasts"}
                     onClick={this.props.handleFilterClick}
                 />
             </div>

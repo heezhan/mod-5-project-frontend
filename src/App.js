@@ -12,6 +12,7 @@ import Login from './components/Login';
 import PlaylistsContainer from './containers/PlaylistsContainer';
 import PlaylistDetails from './components/PlaylistDetails';
 import Signup from './components/Signup';
+import PodcastsContainer from './containers/PodcastsContainer';
 
 class App extends React.Component {
   state = {
@@ -33,17 +34,32 @@ class App extends React.Component {
         </Sticky>
 
         < Route exact path="/">
-          < SearchBar />
+          < SearchBar activeFilter={this.state.activeFilter}/>
         </Route>
 
-        < Route exact path="/search/:query">
-          < SearchBar />
-          < FiltersContainer 
-            activeFilter={this.state.activeFilter} 
-            handleFilterClick={this.handleFilterClick}
-          />
-          < EpisodesContainer />
+        < Route path="/search">
+          < SearchBar activeFilter={this.state.activeFilter}/>
         </Route>
+        
+        {this.state.activeFilter === "episodes" ? (
+          < Route exact path="/search/episodes/:query">
+            < FiltersContainer 
+                activeFilter={this.state.activeFilter} 
+                handleFilterClick={this.handleFilterClick}
+            />
+            < EpisodesContainer />
+          </ Route >
+        ) : (
+          < Redirect to="/search/podcasts/:query" />
+        )}
+
+        < Route exact path="/search/podcasts/:query">
+          < FiltersContainer 
+              activeFilter={this.state.activeFilter} 
+              handleFilterClick={this.handleFilterClick}
+          />
+          < PodcastsContainer />
+        </ Route >
 
         < Route exact path="/login" >
             < Login />

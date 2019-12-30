@@ -16,8 +16,13 @@ class SearchBar extends React.Component {
 
     searchHandler = (event) => {
         event.preventDefault()
+      
         this.props.fetchSearchResults(this.state.query)
-        this.props.history.push(`/search/${this.state.query}`)
+        if (this.props.activeFilter === "episodes") {
+            this.props.history.push(`/search/episodes/${this.state.query}`)
+        } else {
+            this.props.history.push(`/search/podcasts/${this.state.query}`)
+        }
     }
 
     render() {

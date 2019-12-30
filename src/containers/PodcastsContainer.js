@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchSearchResults } from '../redux/actions/fetchSearchResults';
-import EpisodeCard from '../components/EpisodeCard'
+import { removeSearchResults, fetchSearchResults } from '../redux/actions/fetchSearchResults';
+// import PodcastCard from '../components/PodcastCard'
 
-class EpisodesContainer extends React.Component {
+class PodcastsContainer extends React.Component {
     componentDidMount() {
         this.props.fetchSearchResults(this.props.match.params.query)
     }
@@ -13,13 +13,14 @@ class EpisodesContainer extends React.Component {
         return (
             <div>
                 < br />
+                <h1>PodcastsContainer</h1>
                 <div className="container">
-                    {this.props.searchResults.map(episodeObj => 
+                    {/* {this.props.searchResults.map(episodeObj => 
                         <EpisodeCard 
                             key={episodeObj.id}
                             episodeObj={episodeObj}
                         />
-                    )}
+                    )} */}
                 </div>
             </div>
         )
@@ -38,4 +39,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EpisodesContainer))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PodcastsContainer))
