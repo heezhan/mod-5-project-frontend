@@ -1,26 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { removeSearchResults, fetchSearchResults } from '../redux/actions/fetchSearchResults';
-// import PodcastCard from '../components/PodcastCard'
+import { fetchPodcastSearchResults } from '../redux/actions/fetchPodcastSearchResults';
+import PodcastCard from '../components/PodcastCard'
 
 class PodcastsContainer extends React.Component {
-    componentDidMount() {
-        this.props.fetchSearchResults(this.props.match.params.query)
+    componentDidMount() {  
+        this.props.fetchPodcastSearchResults(this.props.match.params.query)
     }
 
     render() {
+        // console.log(this.props.searchResults)
         return (
             <div>
                 < br />
-                <h1>PodcastsContainer</h1>
                 <div className="container">
-                    {/* {this.props.searchResults.map(episodeObj => 
-                        <EpisodeCard 
-                            key={episodeObj.id}
-                            episodeObj={episodeObj}
+                    {this.props.searchResults.map(podcastObj => 
+                        <PodcastCard 
+                            key={podcastObj.id}
+                            podcastObj={podcastObj}
                         />
-                    )} */}
+                    )}
                 </div>
             </div>
         )
@@ -35,7 +35,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchSearchResults:(query) => dispatch(fetchSearchResults(query))
+        fetchPodcastSearchResults:(query) => dispatch(fetchPodcastSearchResults(query))
     }
 }
 

@@ -48,17 +48,17 @@
   width: 15vw !important;
 }
 
-.opacity {
-  opacity: 0.7 !important;
-}
+/* .opacity {
+  opacity: 0.5 !important;
+} */
 
 .navbar-buttons {
   font-family: 'Lato', sans-serif !important;
 }
 
-.login-page{
+/* .login-page{
   background-color: white
-}
+} */
 
 .container {
   display: grid;
@@ -69,9 +69,13 @@
   align-items: center;
 }
 
-.episode-card {
+.card-container {
   background-color: #404040;
   border-radius: 31px;
   padding: 5%;
   width: auto;
+}
+
+.search-bar {
+  width: 350px !important;
 }

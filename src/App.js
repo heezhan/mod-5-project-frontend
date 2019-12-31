@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Sticky } from 'semantic-ui-react'
 import './App.css';
@@ -13,15 +13,30 @@ import PlaylistsContainer from './containers/PlaylistsContainer';
 import PlaylistDetails from './components/PlaylistDetails';
 import Signup from './components/Signup';
 import PodcastsContainer from './containers/PodcastsContainer';
+import PodcastDetails from './components/PodcastDetails';
+
 
 class App extends React.Component {
   state = {
+    query: "",
     activeFilter: "episodes"
+  }
+
+  onChangeSearch = (event) => {
+    this.setState({
+        query: event.target.value
+    })
   }
 
   handleFilterClick = (event) => {
     this.setState({
       activeFilter: event.target.name
+    }, () => {
+      if (this.state.activeFilter === "episodes") {
+      this.props.history.push(`/search/episodes/${this.state.query}`)
+    } else {  
+      this.props.history.push(`/search/podcasts/${this.state.query}`)
+    }
     })
   }
 
@@ -34,30 +49,40 @@ class App extends React.Component {
         </Sticky>
 
         < Route exact path="/">
-          < SearchBar activeFilter={this.state.activeFilter}/>
+          < SearchBar 
+            activeFilter={this.state.activeFilter}
+            query={this.state.query}
+            onChangeSearch={this.onChangeSearch}
+          />
         </Route>
 
         < Route path="/search">
-          < SearchBar activeFilter={this.state.activeFilter}/>
+          < SearchBar 
+            activeFilter={this.state.activeFilter}
+            query={this.state.query}
+            onChangeSearch={this.onChangeSearch}
+          />
         </Route>
-        
-        {this.state.activeFilter === "episodes" ? (
-          < Route exact path="/search/episodes/:query">
-            < FiltersContainer 
-                activeFilter={this.state.activeFilter} 
-                handleFilterClick={this.handleFilterClick}
-            />
-            < EpisodesContainer />
-          </ Route >
-        ) : (
-          < Redirect to="/search/podcasts/:query" />
-        )}
 
-        < Route exact path="/search/podcasts/:query">
+        < Route path="/search/episodes">
           < FiltersContainer 
               activeFilter={this.state.activeFilter} 
               handleFilterClick={this.handleFilterClick}
           />
+        </Route>
+
+        < Route path="/search/podcasts">
+          < FiltersContainer 
+              activeFilter={this.state.activeFilter} 
+              handleFilterClick={this.handleFilterClick}
+          />
+        </Route>
+
+        < Route exact path="/search/episodes/:query">
+          < EpisodesContainer />
+        </ Route >
+
+        < Route exact path="/search/podcasts/:query">
           < PodcastsContainer />
         </ Route >
 
@@ -90,20 +115,28 @@ class App extends React.Component {
           null
         ) }
         
-        {this.props.searchResults.length > 0 || this.props.allUserPlaylists.length > 0 ? 
-        (
-          <>
-            < Route exact path="/episodes/:id" render={
-              (props) => 
-              { 
-                const apiId = props.match.params.id  
-                return <EpisodeDetails apiId={apiId} />
+        {
+          this.props.searchResults.length > 0 || this.props.allUserPlaylists.length > 0 ? 
+          (
+            <>
+              < Route exact path="/episodes/:id" render={
+                (props) => 
+                { 
+                  const apiId = props.match.params.id  
+                  return <EpisodeDetails apiId={apiId} />
+                }
+              } />
+
+              < Route exact path="/podcasts/:id" render={
+              (props) => {
+                const podcastId = props.match.params.id
+                return < PodcastDetails podcastId={podcastId} />  
               }
-            } />
-          </>
-        ) : (
-          null
-        )
+              } />
+            </>
+          ) : (
+            null
+          )
         }
 
       </div>
@@ -119,4 +152,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

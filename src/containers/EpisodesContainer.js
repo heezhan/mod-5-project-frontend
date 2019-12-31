@@ -5,7 +5,7 @@ import { fetchSearchResults } from '../redux/actions/fetchSearchResults';
 import EpisodeCard from '../components/EpisodeCard'
 
 class EpisodesContainer extends React.Component {
-    componentDidMount() {
+    componentDidMount() { 
         this.props.fetchSearchResults(this.props.match.params.query)
     }
 

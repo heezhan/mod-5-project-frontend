@@ -33,7 +33,7 @@ class NavBar extends React.Component {
     render() {
         return (
             < Segment inverted >
-                < Menu inverted pointing secondary >
+                < Menu inverted pointing secondary size="huge" >
 
                     < Link to="/" >
                         < Menu.Item 

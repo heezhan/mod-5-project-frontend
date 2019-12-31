@@ -2,41 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { fetchSearchResults } from '../redux/actions/fetchSearchResults';
+import { fetchPodcastSearchResults } from '../redux/actions/fetchPodcastSearchResults';
 
 class SearchBar extends React.Component {
-    state = {
-        query: ""
-    }
-
-    onChangeSearch = (event) => {
-        this.setState({
-            query: event.target.value
-        })
-    }
-
     searchHandler = (event) => {
         event.preventDefault()
-      
-        this.props.fetchSearchResults(this.state.query)
+
         if (this.props.activeFilter === "episodes") {
-            this.props.history.push(`/search/episodes/${this.state.query}`)
+            this.props.fetchSearchResults(this.props.query)
+            this.props.history.push(`/search/episodes/${this.props.query}`)
         } else {
-            this.props.history.push(`/search/podcasts/${this.state.query}`)
+            this.props.fetchPodcastSearchResults(this.props.query)
+            this.props.history.push(`/search/podcasts/${this.props.query}`)
         }
     }
 
     render() {
         return (
             <div>
+                < br /> 
                 <form onSubmit={this.searchHandler}>
                     <div className="ui search">
                             <div className="ui huge left icon input">
                                 <input 
-                                    className="prompt"
+                                    className="search-bar prompt"
                                     type="text" 
                                     placeholder="Search by episodes or podcasts"
-                                    value={this.state.query} 
-                                    onChange={this.onChangeSearch} 
+                                    value={this.props.query} 
+                                    onChange={this.props.onChangeSearch} 
                                 />
                                 <i className="search icon"/>
                             </div>
@@ -49,7 +42,8 @@ class SearchBar extends React.Component {
 
 function mapDispatchToProps(dispatch) {
     return { 
-      fetchSearchResults: (query) => dispatch(fetchSearchResults(query))
+      fetchSearchResults: (query) => dispatch(fetchSearchResults(query)),
+      fetchPodcastSearchResults: (query) => dispatch(fetchPodcastSearchResults(query))
     }
 }
 

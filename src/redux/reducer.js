@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
     searchResults: searchResultsReducer,
+    podcastSearchResults: podcastSearchResultsReducer,
     currentUser: currentUserReducer,
     allUserEpisodes: episodeReducer,
     allUserPlaylists: playlistReducer
@@ -19,6 +20,15 @@ function searchResultsReducer(searchResults = [], action) {
                 return searchResults
         }
     }
+
+function podcastSearchResultsReducer(podcastSearchResults = [], action) {
+    switch (action.type) {
+        case "ADD_PODCAST_SEARCH_RESULTS":
+            return action.payload.results
+        default:
+            return podcastSearchResults
+    }
+}
 
 function  currentUserReducer(currentUser = null, action) {
     switch(action.type) {
