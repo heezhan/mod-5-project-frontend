@@ -31,8 +31,8 @@ class PlaylistDetails extends React.Component {
         const foundPlaylist = this.props.allUserPlaylists.find( ({id}) => id === playlistId )
 
         return (
-            <div>
-                <h1>
+            <div className="playlist-details-container">
+                <h1 className="playlist">
                     {foundPlaylist.title} &nbsp;
                     < Modal 
                         trigger={
@@ -86,66 +86,79 @@ class PlaylistDetails extends React.Component {
                             </center>
                         </ Modal.Actions >
                     </ Modal >
+                    <br/>
+                    <br/>
+                    < Modal 
+                        trigger={
+                            < Button basic color="white" inverted animated="vertical" >
+                                < Button.Content hidden >
+                                    Delete
+                                </ Button.Content >
+                                < Button.Content visible >
+                                    < Icon name="trash alternate" />
+                                </ Button.Content >
+                            </ Button >
+                        } 
+                        basic size="small"
+                        closeIcon
+                    >
+                        < Header 
+                            icon="trash alternate"
+                        />
+
+                        < Modal.Content >
+                            <center>
+                                <h2>
+                                    Are you sure you want to delete this playlist?
+                                </h2>
+                            </center>
+                        </ Modal.Content >
+                        
+                        < Modal.Actions >
+                            <center>
+                                < Button 
+                                    basic color="white"
+                                    inverted 
+                                >
+                                    < Icon name="remove" /> 
+                                    Cancel
+                                </ Button >
+        
+                                <Link to="/playlists">
+                                    < Button 
+                                        color="green"
+                                        inverted
+                                        onClick={() => this.handleDelete(foundPlaylist)}
+                                    >
+                                        < Icon name="checkmark" /> 
+                                        Delete
+                                    </ Button >
+                                </Link>
+                            </center>
+                        </ Modal.Actions >
+                    </ Modal >
                 </h1>
-                {
-                    foundPlaylist.episodes.map(
-                        episode => 
-                            <Link to={`/episodes/${episode.api_id}`}>
-                                <h2>{episode.title_original}</h2>
-                            </Link>
-                    )
-                }
+
+                <div className="episodes">
+                    {
+                        foundPlaylist.episodes.map(
+                            episode => 
+                            <Header as='h2'>
+                                <Icon name='podcast' />
+                                <Header.Content className="episode-header">
+                                    <Link to={`/episodes/${episode.api_id}`}>
+                                        {episode.title_original}
+                                    </Link>
+                                        <Header.Subheader>
+                                        by {episode.publisher_original} from {episode.podcast_title_original}
+                                        </Header.Subheader>
+                                </Header.Content>
+                            </Header>
+                        )
+                    }
+                </div>
                 <br/>
                 
-                < Modal 
-                    trigger={
-                        < Button basic color="white" inverted animated="vertical" >
-                            < Button.Content hidden >
-                                Delete
-                            </ Button.Content >
-                            < Button.Content visible >
-                                < Icon name="trash alternate" />
-                            </ Button.Content >
-                        </ Button >
-                    } 
-                    basic size="small"
-                    closeIcon
-                >
-                    < Header 
-                        icon="trash alternate"
-                    />
-
-                    < Modal.Content >
-                        <center>
-                            <h2>
-                                Are you sure you want to delete this playlist?
-                            </h2>
-                        </center>
-                    </ Modal.Content >
-                    
-                    < Modal.Actions >
-                        <center>
-                            < Button 
-                                basic color="white"
-                                inverted 
-                            >
-                                < Icon name="remove" /> 
-                                Cancel
-                            </ Button >
-    
-                            <Link to="/playlists">
-                                < Button 
-                                    color="green"
-                                    inverted
-                                    onClick={() => this.handleDelete(foundPlaylist)}
-                                >
-                                    < Icon name="checkmark" /> 
-                                    Delete
-                                </ Button >
-                            </Link>
-                        </center>
-                    </ Modal.Actions >
-                </ Modal >
             </div>
         )
     }

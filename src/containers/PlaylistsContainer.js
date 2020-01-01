@@ -7,14 +7,18 @@ class PlaylistsContainer extends React.Component {
         const playlistArray = this.props.allUserPlaylists
          
         return (
-            <div>
-                <h1>My Playlists</h1>
-                {
-                    playlistArray.map(
-                        playlistObj => 
-                            < PlaylistCard playlist={playlistObj} />
-                    )
-                }
+            <div className="playlists-container">
+                <div className="header">
+                    <h1 className="google-font">My <br/> Playlists </h1>
+                </div>
+                <div className="playlists">
+                    {
+                        playlistArray.map(
+                            playlistObj => 
+                                < PlaylistCard playlist={playlistObj} />
+                        )
+                    }
+                </div>
             </div>
         )
     }

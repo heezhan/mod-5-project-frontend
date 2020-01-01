@@ -7,11 +7,14 @@ class PlaylistCard extends React.Component {
 
         return (
             <div>
-                <h2>
-                    <Link to={`/playlists/${id}`}>
-                        {title}
-                    </Link>
-                </h2>
+                <div className="playlist-card">
+                    <h2>
+                        <Link to={`/playlists/${id}`}>
+                            {title}
+                        </Link>
+                    </h2>
+                </div>
+                <br/>
             </div>
         )
     }

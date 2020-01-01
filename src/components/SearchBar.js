@@ -27,7 +27,7 @@ class SearchBar extends React.Component {
                                 <input 
                                     className="search-bar prompt"
                                     type="text" 
-                                    placeholder="Search by episodes or podcasts"
+                                    placeholder="Search for episodes or podcasts"
                                     value={this.props.query} 
                                     onChange={this.props.onChangeSearch} 
                                 />

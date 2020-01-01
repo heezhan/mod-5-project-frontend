@@ -7,18 +7,18 @@ class PodcastCard extends React.Component {
         
         return (
             <div>
-                <div className="card-container">
-                    <img className="ui centered small image" src={thumbnail} alt="thumbnail" />
-                    <div className="content">
+                <div className="cards-container">
+                    <img className="image-size ui centered medium image" src={thumbnail} alt="thumbnail" />
+                    <div className="lining content">
                         < Link to={`/podcasts/${id}`} >
-                            <div className="header">
+                            <h3 className="card-contents">
                                 {title_original}
-                            </div>
+                            </h3>
                         </Link>
                         <div className="meta">
-                            <span className="date">
+                            <div className="card-contents">
                                 By {publisher_original}
-                            </span>
+                            </div>
                         </div>
                     </div>
                 </div>
