@@ -21,6 +21,7 @@ class NavBar extends React.Component {
     handleHomeButton = (event) => {
         this.handleItemClick(event)
         this.props.removeSearchResults([])
+        this.props.removeQuery()
     }
 
     handleLogout = (event) => {

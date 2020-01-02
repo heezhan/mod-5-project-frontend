@@ -43,12 +43,18 @@ class App extends React.Component {
     })
   }
 
+  removeQuery = () => {
+    this.setState({
+      query: ""
+    })
+  }
+
   render() {
     return (
       <div style={test} className="App background-image">
 
         <Sticky>
-          < NavBar />
+          < NavBar removeQuery={this.removeQuery}/>
         </Sticky>
 
         < Route exact path="/">

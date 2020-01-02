@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Popup, Checkbox, Divider } from 'semantic-ui-react';
+import { Button, Popup, Checkbox, Divider, Input, Form } from 'semantic-ui-react';
 import { fetchEpisode } from '../redux/actions/fetchEpisode';
 import { fetchPlaylist } from '../redux/actions/fetchPlaylist';
 import { destroyPlaylistEpisode } from '../redux/actions/destroyPlaylistEpisode';
@@ -16,8 +16,10 @@ class EpisodeDetails extends React.Component {
     }
 
     clickHandler = () => {
-        // clear form input
         this.props.fetchPlaylist({user_id: this.props.currentUser.id, title: this.state.title})
+        this.setState({
+            title: ""
+        })
     }
 
     onChangeTitle = (event) => {
@@ -43,43 +45,57 @@ class EpisodeDetails extends React.Component {
                 (
                     <div>
                         {this.props.allUserPlaylists.map(playlistObj => 
-                            <Checkbox
-                                label={<label className="text-color">{playlistObj.title}</label>}
-                                value={playlistObj.id}
-                                onChange={
-                                    () => this.toggleCheckbox(playlistObj, episodeObj, id)
-                                }
-                                checked={playlistObj.episodes.find( ({id}) => id === episodeObj.id) ? (true) : (false)}
-                            />
+                            <div>
+                                <Checkbox
+                                    label={<label className="text-color">{playlistObj.title}</label>}
+                                    value={playlistObj.id}
+                                    onChange={
+                                        () => this.toggleCheckbox(playlistObj, episodeObj, id)
+                                    }
+                                    checked={playlistObj.episodes.find( ({id}) => id === episodeObj.id) ? (true) : (false)}
+                                />
+                                <br/>
+                            </div>
                         )}
                         < Divider />
-                        <input 
-                            type="text" 
-                            placeholder="Title" 
-                            value={this.state.title} 
-                            onChange={this.onChangeTitle}
-                        />
-                        <button 
-                            onClick={this.clickHandler} 
-                        >
-                            Create a playlist
-                        </button>
+                        <Form>
+                            <Input
+                                type="text" 
+                                placeholder="Title" 
+                                value={this.state.title} 
+                                onChange={this.onChangeTitle}
+                            />
+                            <center>
+                                <Button 
+                                    onClick={this.clickHandler}
+                                    content="Create a playlist"
+                                    basic color="white"
+                                    inverted 
+                                />
+                            </center>
+                        </Form>
+                      
                     </div>
                 ) : (
                     <div>
-                        No playlists yet
+                        <center>No playlists yet</center>
                         < Divider />
-                        <input 
-                            type="text" 
-                            placeholder="Title" 
-                            value={this.state.title} 
-                            onChange={this.onChangeTitle}
-                        />
-                        <button 
-                            onClick={this.clickHandler} 
-                        >
-                            Create a playlist
-                        </button>
+                        <Form>
+                            <Input 
+                                type="text" 
+                                placeholder="Title" 
+                                value={this.state.title} 
+                                onChange={this.onChangeTitle}
+                            />
+                            <center>
+                                <Button 
+                                    onClick={this.clickHandler}
+                                    content="Create a playlist"
+                                    basic color="white"
+                                    inverted 
+                                />
+                            </center>
+                        </Form>
                     </div>
                 )
             ) : (
