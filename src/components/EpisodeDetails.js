@@ -30,8 +30,7 @@ class EpisodeDetails extends React.Component {
         console.log(playlistObj, episodeObj, id)
         if (episodeObj.playlists === undefined || episodeObj.playlists.find(({id}) => id === playlistObj.id ) === undefined) { 
             this.props.fetchEpisode(playlistObj, episodeObj,id)
-        } else { 
-            debugger 
+        } else {  
             this.props.destroyPlaylistEpisode(playlistObj, episodeObj, id)
         }
     }
@@ -92,7 +91,7 @@ class EpisodeDetails extends React.Component {
         pinned 
         position="bottom center"
         trigger={
-            <Button icon="add" content="Add to Playlist"/>
+            <Button icon="add" content="Add to Playlist" basic color="white" inverted/>
         }
         />
     }
@@ -101,6 +100,7 @@ class EpisodeDetails extends React.Component {
         // let episodeObj
         let userEpisode = this.props.allUserEpisodes.find( ({api_id}) => api_id === this.props.apiId )
         // let id 
+        console.log("mounted again")
 
         if (userEpisode) {
             if (this.props.allUserEpisodes.filter(episode => episode.api_id === userEpisode.api_id).length > 1) {
@@ -133,10 +133,7 @@ class EpisodeDetails extends React.Component {
             .then(resp => resp.json())
             .then(episode => this.setState({
                 stateEpisode: episode
-            }), () => {
-                this.setState({episodeObj: this.state.stateEpisode})
-                this.setState({id: this.props.apiId})
-            })
+            }))
         }
     }
     
@@ -158,27 +155,60 @@ class EpisodeDetails extends React.Component {
             id = episodeObj.id
         } 
 
+        console.log(episodeObj, id)
+
         return (
-            this.state.episodeObj !== undefined ? 
+            this.state.episodeObj !== undefined? 
             ( 
-            <div>
-                <h2>{episodeObj.podcast_title_original}</h2>
-                <h2>By {episodeObj.publisher_original}</h2>
-                <h1>{episodeObj.title_original}</h1>
-                <audio className="audio-size"
-                        controls
-                        src={episodeObj.audio}>
-                            Your browser does not support the 
-                            <code>{episodeObj.audio}</code> element.
-                </audio>
-                <h3>About This Episode</h3>
-                <h3>{episodeObj.description_original}</h3>
-                <div className="title">
-                    {this.renderPopup(episodeObj, id)}
+            <div className="padding">
+                {console.log("im in here")}
+                <div className="details-card">
+                    <div className="name">
+                        <h1 className="header-font">{episodeObj.title_original}</h1>
+                        <h2>{episodeObj.podcast_title_original}</h2>
+                        <h2>By {episodeObj.publisher_original}</h2>
+                        <audio className="audio-size"
+                                controls
+                                src={episodeObj.audio}>
+                                    Your browser does not support the 
+                                    <code>{episodeObj.audio}</code> element.
+                        </audio>
+                        <div className="title">
+                            <br/>
+                            {this.renderPopup(episodeObj, id)}
+                        </div>
+                    </div>
+                    <div className="details">
+                        <h3>About This Episode</h3>
+                        <h3>{episodeObj.description_original}</h3>
+                    </div>
                 </div>
             </div>
             ) : (
-                this.state.stateEpisode ? (<h1>{this.state.stateEpisode.title}</h1>) : (null)
+                this.state.stateEpisode ? (<div className="padding">
+                {console.log("here instead")}
+                <div className="details-card">
+                    <div className="name">
+                        <h1 className="header-font">{this.state.stateEpisode.title}</h1>
+                        <h2>{this.state.stateEpisode.podcast.title}</h2>
+                        <h2>By {this.state.stateEpisode.podcast.publisher}</h2>
+                        <audio className="audio-size"
+                                controls
+                                src={this.state.stateEpisode.audio}>
+                                    Your browser does not support the 
+                                    <code>{this.state.stateEpisode.audio}</code> element.
+                        </audio>
+                        <div className="title">
+                            <br/>
+                            {episodeObj ? (this.renderPopup(episodeObj, id)) : (this.renderPopup(this.state.stateEpisode, this.state.stateEpisode.id))}
+                        </div>
+                    </div>
+                    <div className="details">
+                        <h3>About This Episode</h3>
+                        <h3>{this.state.stateEpisode.description}</h3>
+                    </div>
+                </div>
+            </div>) : (null)
             ) 
         ) 
     }

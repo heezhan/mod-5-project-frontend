@@ -42,18 +42,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App background-image">
 
         <Sticky>
           < NavBar />
         </Sticky>
 
         < Route exact path="/">
-              < SearchBar 
-                activeFilter={this.state.activeFilter}
-                query={this.state.query}
-                onChangeSearch={this.onChangeSearch}
-              />
+          <h1 className="logo">
+            Podcastr
+          </h1>
+          < SearchBar 
+            activeFilter={this.state.activeFilter}
+            query={this.state.query}
+            onChangeSearch={this.onChangeSearch}
+          />
         </Route>
 
         < Route path="/search">

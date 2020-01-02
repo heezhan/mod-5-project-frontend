@@ -32,13 +32,14 @@ class PlaylistDetails extends React.Component {
 
         return (
             <div className="playlist-details-container">
-                <h1 className="playlist">
+                <h1 className="playlist-title playlist">
                     {foundPlaylist.title} &nbsp;
                     < Modal 
                         trigger={
                             < Button 
                                 circular icon="pencil alternate"
                                 basic inverted color="yellow"
+                                size="big"
                             />
                         } 
                         basic size="small"
@@ -86,11 +87,10 @@ class PlaylistDetails extends React.Component {
                             </center>
                         </ Modal.Actions >
                     </ Modal >
-                    <br/>
-                    <br/>
+                    <br/>         
                     < Modal 
                         trigger={
-                            < Button basic color="white" inverted animated="vertical" >
+                            < Button basic color="white" inverted animated="vertical" size="big">
                                 < Button.Content hidden >
                                     Delete
                                 </ Button.Content >
@@ -146,8 +146,8 @@ class PlaylistDetails extends React.Component {
                             <Header as='h2'>
                                 <Icon name='podcast'/>
                                 <Header.Content className="episode-header">
-                                    <Link className="text-color" to={`/episodes/${episode.api_id}`}>
-                                        {episode.title_original}
+                                    <Link className="diff-link" to={`/episodes/${episode.api_id}`}>
+                                        <b>{episode.title_original}</b>
                                     </Link>
                                         <Header.Subheader className="text-color">
                                             <b>{episode.publisher_original} ✿ {episode.podcast_title_original}</b>

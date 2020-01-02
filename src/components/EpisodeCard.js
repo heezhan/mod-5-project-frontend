@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Popup } from 'semantic-ui-react';
 
 
 class EpisodeCard extends React.Component {
@@ -9,22 +10,37 @@ class EpisodeCard extends React.Component {
         return (
             <div className="cards-container">
                 <img className="image-size ui centered medium image" src={thumbnail} alt="thumbnail" />
-                <br/>
                 <div className="lining content">
-                    <Link className="text-color" to={`/episodes/${id}`}>
-                        <h3 className="card-contents">
-                            {title_original}
-                        </h3>
-                    </Link>
-                    <div className="meta">
-                        <div className="text-color card-contents">
-                            <b>
-                                {podcast_title_original} 
-                                <br/>
-                                By {publisher_original}
-                            </b>
-                        </div>
-                    </div>
+                    <Popup
+                        trigger={
+                            <Link to={`/episodes/${id}`}>
+                                <h3 className="link card-contents">
+                                    {title_original}
+                                </h3>
+                            </Link>
+                        }
+                        content={title_original}
+                        inverted
+                        position='bottom left'
+                        size='tiny'
+                    />
+                    <Popup
+                        trigger={
+                            <div className="meta">
+                                <div className="text-color card-contents">
+                                    
+                                        from {podcast_title_original} 
+                                        <br/>
+                                        by {publisher_original}
+                                    
+                                </div>
+                            </div>
+                        }
+                        content={`${podcast_title_original} by ${publisher_original}`}
+                        inverted
+                        position='bottom left'
+                        size='tiny'
+                    />
                 </div>
                 {/* <div className="extra content">
                     <audio className="audio-size"

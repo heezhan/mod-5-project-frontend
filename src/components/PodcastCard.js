@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Popup } from 'semantic-ui-react';
 
 class PodcastCard extends React.Component {
     render() {
@@ -10,16 +11,32 @@ class PodcastCard extends React.Component {
                 <div className="cards-container">
                     <img className="image-size ui centered medium image" src={thumbnail} alt="thumbnail" />
                     <div className="lining content">
-                        < Link to={`/podcasts/${id}`} >
-                            <h3 className="card-contents">
-                                {title_original}
-                            </h3>
-                        </Link>
-                        <div className="meta">
-                            <div className="card-contents">
-                                By {publisher_original}
-                            </div>
-                        </div>
+                        <Popup
+                            trigger={
+                                < Link to={`/podcasts/${id}`}>
+                                    <h3 className="link card-contents">
+                                        {title_original}
+                                    </h3>
+                                </Link>
+                            }
+                            content={title_original}
+                            inverted
+                            position='bottom left'
+                            size='tiny'
+                        />
+                        <Popup
+                            trigger={
+                                <div className="meta">
+                                    <div className="text-color card-contents">
+                                        <b>by {publisher_original}</b>
+                                    </div>
+                                </div>
+                            }
+                            content={publisher_original}
+                            inverted
+                            position='bottom left'
+                            size='tiny'
+                        />
                     </div>
                 </div>
             </div>

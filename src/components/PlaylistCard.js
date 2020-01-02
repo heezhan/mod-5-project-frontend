@@ -19,11 +19,10 @@ class PlaylistCard extends React.Component {
                         <Header>
                             <Header.Content>
                                 <Link className="text-color" to={`/playlists/${id}`}>
-                                    {title}
+                                    {title} 
                                 </Link>
                                 <Header.Subheader className="text-color">
-                                    <b>{parseDate()}</b>
-                                    {/* made with ♥️ on */}
+                                    <b>✿ {parseDate()}</b>
                                 </Header.Subheader>
                             </Header.Content>
                         </Header>
