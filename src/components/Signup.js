@@ -47,6 +47,8 @@ class Signup extends React.Component {
                         <Button  
                             type="submit"
                             content="Sign Up"
+                            basic color="white"
+                            inverted 
                         />
                     </Form>
                 </Segment>

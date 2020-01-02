@@ -48,19 +48,23 @@ class Login extends React.Component {
                         <Button  
                             type="submit"
                             content="Login"
+                            basic color="white"
+                            inverted 
                         />
                     </Form>
 
                     <br/>
                     < Divider />
 
-                    <h4>
+                    <h4 className="text-color">
                         Don't have an account?
                     </h4>
                     <Link to={"/signup"}>
                         <Button 
                             type="click"
                             content="Sign Up for Podcastr"
+                            basic color="white"
+                            inverted 
                         />
                     </Link>
                 </Segment>

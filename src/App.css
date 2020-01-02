@@ -75,10 +75,6 @@
   font-family: 'Lato', sans-serif !important;
 }
 
-/* .login-page{
-  background-color: white
-} */
-
 .container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -91,7 +87,7 @@
 }
 
 .cards-container {
-  background-color: #404040;
+  background-color: #272829;
   border-radius: 30px;
   padding: 8%;
   width: 16vw;
@@ -136,6 +132,7 @@
 
 .google-font {
   font-family: 'Lato', sans-serif !important;
+  /* font-family: 'Abril Fatface', cursive; */
   font-size: 80px;
   text-align: left;
 }
@@ -149,7 +146,10 @@
   border-radius: 30px;
   padding: 2%;
   width: 400px; */
-  text-align: left
+  text-align: left;
+  border: 5px solid white;
+  border-radius: 12px;
+  padding: 10px;
 }
 
 .episode-header {
@@ -170,4 +170,17 @@
 
 .episodes {
   grid-area: episodes;
+}
+
+.text-color {
+  color: white !important; 
+  font-family: 'Lato', sans-serif !important;
+}
+
+.login-page {
+  padding: 10%
+}
+
+.search-bar {
+  padding: 30%
 }

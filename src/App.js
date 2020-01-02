@@ -49,11 +49,11 @@ class App extends React.Component {
         </Sticky>
 
         < Route exact path="/">
-          < SearchBar 
-            activeFilter={this.state.activeFilter}
-            query={this.state.query}
-            onChangeSearch={this.onChangeSearch}
-          />
+              < SearchBar 
+                activeFilter={this.state.activeFilter}
+                query={this.state.query}
+                onChangeSearch={this.onChangeSearch}
+              />
         </Route>
 
         < Route path="/search">

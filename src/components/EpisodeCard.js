@@ -11,16 +11,18 @@ class EpisodeCard extends React.Component {
                 <img className="image-size ui centered medium image" src={thumbnail} alt="thumbnail" />
                 <br/>
                 <div className="lining content">
-                    <Link to={`/episodes/${id}`}>
+                    <Link className="text-color" to={`/episodes/${id}`}>
                         <h3 className="card-contents">
                             {title_original}
                         </h3>
                     </Link>
                     <div className="meta">
-                        <div className="card-contents">
-                            {podcast_title_original} 
-                            <br/>
-                            By {publisher_original}
+                        <div className="text-color card-contents">
+                            <b>
+                                {podcast_title_original} 
+                                <br/>
+                                By {publisher_original}
+                            </b>
                         </div>
                     </div>
                 </div>

@@ -144,13 +144,13 @@ class PlaylistDetails extends React.Component {
                         foundPlaylist.episodes.map(
                             episode => 
                             <Header as='h2'>
-                                <Icon name='podcast' />
+                                <Icon name='podcast'/>
                                 <Header.Content className="episode-header">
-                                    <Link to={`/episodes/${episode.api_id}`}>
+                                    <Link className="text-color" to={`/episodes/${episode.api_id}`}>
                                         {episode.title_original}
                                     </Link>
-                                        <Header.Subheader>
-                                        by {episode.publisher_original} from {episode.podcast_title_original}
+                                        <Header.Subheader className="text-color">
+                                            <b>{episode.publisher_original} ✿ {episode.podcast_title_original}</b>
                                         </Header.Subheader>
                                 </Header.Content>
                             </Header>
