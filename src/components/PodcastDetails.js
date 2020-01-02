@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Header, Icon } from 'semantic-ui-react'
 
 class PodcastDetails extends React.Component {
     state = {
@@ -30,18 +31,32 @@ class PodcastDetails extends React.Component {
         const {id, image, title, publisher, episodes} = this.state.podcast
 
         return(
-            <div>
-                <h1>{title}</h1>
-                {
-                    episodes ? (
-                        episodes.map(episode => 
-                            <Link to={`/episodes/${episode.id}`}>
-                                {episode.title}
-                            </Link>)
-                        ) : (
-                            null
-                            )
-                }
+            <div className="playlist-details-container">
+                <h1 className="playlist-title playlist">
+                    {title}
+                </h1>
+                <div className="episodes">
+                    { 
+                        episodes ? (
+                            episodes.map(episode => 
+                                <Header as='h2'>
+                                    {console.log(episode)}
+                                <Icon name='podcast'/>
+                                <Header.Content className="episode-header">
+                                    <Link className="diff-link" to={`/episodes/${episode.id}`}>
+                                        {episode.title}
+                                    </Link>
+                                        <Header.Subheader className="text-color">
+                                            <b>✿ {episode.description} </b>
+                                        </Header.Subheader>
+                                </Header.Content>
+                                </Header>
+                                )
+                            ) : (
+                                null
+                                )
+                    }
+                </div>
             </div>
         )
     }

@@ -140,7 +140,7 @@ class PlaylistDetails extends React.Component {
                 </h1>
 
                 <div className="episodes">
-                    {
+                    { 
                         foundPlaylist.episodes.map(
                             episode => 
                             <Header as='h2'>

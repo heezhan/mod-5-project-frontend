@@ -44,7 +44,7 @@ class EpisodeDetails extends React.Component {
                     <div>
                         {this.props.allUserPlaylists.map(playlistObj => 
                             <Checkbox
-                                label={<label>{playlistObj.title}</label>}
+                                label={<label className="text-color">{playlistObj.title}</label>}
                                 value={playlistObj.id}
                                 onChange={
                                     () => this.toggleCheckbox(playlistObj, episodeObj, id)
@@ -93,6 +93,7 @@ class EpisodeDetails extends React.Component {
         trigger={
             <Button icon="add" content="Add to Playlist" basic color="white" inverted/>
         }
+        inverted
         />
     }
 
@@ -164,9 +165,9 @@ class EpisodeDetails extends React.Component {
                 {console.log("im in here")}
                 <div className="details-card">
                     <div className="name">
-                        <h1 className="header-font">{episodeObj.title_original}</h1>
-                        <h2>{episodeObj.podcast_title_original}</h2>
-                        <h2>By {episodeObj.publisher_original}</h2>
+                        <img className="image-size ui centered small image" src={episodeObj.thumbnail} alt="thumbnail" />
+                        <h2 className="header-font">{episodeObj.title_original}</h2>
+                        <h3>from {episodeObj.podcast_title_original} <br/> by {episodeObj.publisher_original}</h3>
                         <audio className="audio-size"
                                 controls
                                 src={episodeObj.audio}>
@@ -180,7 +181,7 @@ class EpisodeDetails extends React.Component {
                     </div>
                     <div className="details">
                         <h3>About This Episode</h3>
-                        <h3>{episodeObj.description_original}</h3>
+                        <h3 className="description">{episodeObj.description_original}</h3>
                     </div>
                 </div>
             </div>
@@ -189,9 +190,9 @@ class EpisodeDetails extends React.Component {
                 {console.log("here instead")}
                 <div className="details-card">
                     <div className="name">
+                        <img className="image-size ui centered small image" src={this.state.stateEpisode.thumbnail} alt="thumbnail" />
                         <h1 className="header-font">{this.state.stateEpisode.title}</h1>
-                        <h2>{this.state.stateEpisode.podcast.title}</h2>
-                        <h2>By {this.state.stateEpisode.podcast.publisher}</h2>
+                        <h3>from {this.state.stateEpisode.podcast.title} <br/> by {this.state.stateEpisode.podcast.publisher}</h3>
                         <audio className="audio-size"
                                 controls
                                 src={this.state.stateEpisode.audio}>

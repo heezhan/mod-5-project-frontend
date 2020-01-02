@@ -43,13 +43,13 @@ class NavBar extends React.Component {
                         />
                     </ Link >
 
-                    < Link to="/about" >
+                    {/* < Link to="/about" >
                         < Menu.Item 
                             content="About"
                             active={this.state.activeItem === "About"}
                             onClick={this.handleItemClick}
                         />
-                    </ Link >
+                    </ Link > */}
 
                     {this.props.currentUser ? (
                         < Link to="/playlists" >
