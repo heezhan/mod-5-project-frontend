@@ -15,6 +15,9 @@ import Signup from './components/Signup';
 import PodcastsContainer from './containers/PodcastsContainer';
 import PodcastDetails from './components/PodcastDetails';
 
+const test = {
+  height: "100vh"
+}
 
 class App extends React.Component {
   state = {
@@ -42,7 +45,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App background-image">
+      <div style={test} className="App background-image">
 
         <Sticky>
           < NavBar />

@@ -31,7 +31,7 @@ class PodcastDetails extends React.Component {
         const {id, image, title, publisher, episodes} = this.state.podcast
 
         return(
-            <div className="playlist-details-container">
+            <div id="view-height" className="playlist-details-container">
                 <h1 className="playlist-title playlist">
                     {title}
                 </h1>
@@ -46,7 +46,7 @@ class PodcastDetails extends React.Component {
                                     <Link className="diff-link" to={`/episodes/${episode.id}`}>
                                         {episode.title}
                                     </Link>
-                                        <Header.Subheader className="text-color">
+                                        <Header.Subheader className="text-color scrolling">
                                             <b>✿ {episode.description} </b>
                                         </Header.Subheader>
                                 </Header.Content>

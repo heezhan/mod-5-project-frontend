@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchSearchResults } from '../redux/actions/fetchSearchResults';
 import EpisodeCard from '../components/EpisodeCard';
-import { Button } from 'semantic-ui-react';
 
 class EpisodesContainer extends React.Component {
     componentDidMount() { 
@@ -22,7 +21,6 @@ class EpisodesContainer extends React.Component {
                         />
                     )}
                 </div>
-                < Button icon="add" onClick={null} />
             </div>
         )
     }

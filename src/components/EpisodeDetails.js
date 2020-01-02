@@ -94,6 +94,7 @@ class EpisodeDetails extends React.Component {
             <Button icon="add" content="Add to Playlist" basic color="white" inverted/>
         }
         inverted
+        size='huge'
         />
     }
 
