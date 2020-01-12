@@ -220,7 +220,8 @@ body {
 }
 
 .description {
-  text-align: left !important;
+  overflow: auto;
+  margin-right: 10%;
 }
 
 .name {
@@ -228,7 +229,9 @@ body {
 }
 
 .details {
-  grid-area: details
+  grid-area: details;
+  overflow: auto;
+  margin-right: 10%;
 }
 
 .header-font {
