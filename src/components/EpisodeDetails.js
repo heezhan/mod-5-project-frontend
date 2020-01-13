@@ -5,6 +5,7 @@ import { fetchEpisode } from '../redux/actions/fetchEpisode';
 import { fetchPlaylist } from '../redux/actions/fetchPlaylist';
 import { destroyPlaylistEpisode } from '../redux/actions/destroyPlaylistEpisode';
 import { removeEpisode } from '../redux/actions/destroyPlaylistEpisode'
+import { updateEpisodeNotes } from '../redux/actions/fetchEpisode'
 import ReactHtmlParser from 'react-html-parser';
 
 class EpisodeDetails extends React.Component {
@@ -25,7 +26,7 @@ class EpisodeDetails extends React.Component {
 
     notesSubmitHandler = (event, episodeObj) => {
         event.preventDefault()
-        console.log("episode", episodeObj)
+        
         fetch("http://localhost:3000/update", {
             method: "POST",
             headers: {
@@ -38,7 +39,7 @@ class EpisodeDetails extends React.Component {
             })
         })
         .then(resp => resp.json())
-        .then(wtf => console.log(wtf))
+        .then(episodeObj => this.props.updateEpisodeNotes(episodeObj))
     }
 
     clickHandler = () => {
@@ -91,6 +92,8 @@ class EpisodeDetails extends React.Component {
                                 value={this.state.title} 
                                 onChange={this.onChangeTitle}
                             />
+                            <br/>
+                            <br/>
                             <center>
                                 <Button 
                                     onClick={this.clickHandler}
@@ -298,9 +301,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         fetchEpisode: (playlistObj, episodeObj, id) => dispatch(fetchEpisode(playlistObj, episodeObj, id)),
+
         fetchPlaylist: (playlistObj) => dispatch(fetchPlaylist(playlistObj)),
+
         destroyPlaylistEpisode: (playlistObj, episodeObj, id) => dispatch(destroyPlaylistEpisode(playlistObj, episodeObj, id)),
-        removeEpisode: (episode) => dispatch(removeEpisode(episode))
+
+        removeEpisode: (episode) => dispatch(removeEpisode(episode)),
+
+        updateEpisodeNotes: (episode) => dispatch(updateEpisodeNotes(episode))
     }
 }
 

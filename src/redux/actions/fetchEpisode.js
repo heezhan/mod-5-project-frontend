@@ -4,6 +4,10 @@ const addEpisode = (episode) => {
     return {type: "ADD_EPISODE", payload: episode}
 }
 
+const updateEpisodeNotes = (episode) => {
+    return {type: "UPDATE_EPISODE_NOTES", payload: episode}
+}
+
 const removeAllEpisodes = (emptyArray) => {
     return {type: "REMOVE_ALL_EPISODES", payload: emptyArray}
 }
@@ -77,4 +81,4 @@ const fetchEpisode = (playlistObj, episodeObj, id) => {
     }
 }
 
-export { addEpisode, removeAllEpisodes, fetchEpisode } 
+export { addEpisode, updateEpisodeNotes, removeAllEpisodes, fetchEpisode } 
