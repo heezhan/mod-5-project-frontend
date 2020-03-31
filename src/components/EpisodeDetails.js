@@ -5,8 +5,6 @@ import { fetchEpisode } from '../redux/actions/fetchEpisode';
 import { fetchPlaylist } from '../redux/actions/fetchPlaylist';
 import { destroyPlaylistEpisode } from '../redux/actions/destroyPlaylistEpisode';
 import { removeEpisode } from '../redux/actions/destroyPlaylistEpisode'
-import { updateEpisodeNotes } from '../redux/actions/fetchEpisode'
-import ReactHtmlParser from 'react-html-parser';
 
 class EpisodeDetails extends React.Component {
     state = {
@@ -14,32 +12,7 @@ class EpisodeDetails extends React.Component {
         title: "",
         stateEpisode: null,
         episodeObj: undefined,
-        id: undefined,
-        notes: ""
-    }
-
-    onChangeNotes = (event) => {
-        this.setState({
-            notes: event.target.value 
-        })
-    }
-
-    notesSubmitHandler = (event, episodeObj) => {
-        event.preventDefault()
-        
-        fetch("http://localhost:3000/update", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                id: episodeObj.id,
-                notes: this.state.notes 
-            })
-        })
-        .then(resp => resp.json())
-        .then(episodeObj => this.props.updateEpisodeNotes(episodeObj))
+        id: undefined 
     }
 
     clickHandler = () => {
@@ -92,8 +65,6 @@ class EpisodeDetails extends React.Component {
                                 value={this.state.title} 
                                 onChange={this.onChangeTitle}
                             />
-                            <br/>
-                            <br/>
                             <center>
                                 <Button 
                                     onClick={this.clickHandler}
@@ -224,38 +195,10 @@ class EpisodeDetails extends React.Component {
                             <br/>
                             {this.renderPopup(episodeObj, id)}
                         </div>
-                        <br/>
-                        <br/>
-                        <br/>
-                        {this.props.currentUser && episodeObj.notes || episodeObj.notes === "" ? (
-                            <div>
-                                {episodeObj.notes}
-                                <Form onSubmit={(event) => this.notesSubmitHandler(event, episodeObj)}> 
-                                    <Input
-                                        type="textarea"
-                                        name="notes"
-                                        placeholder="Notes"
-                                        value={this.state.notes}
-                                        onChange={this.onChangeNotes}
-                                    />
-                                    <br/>
-                                    <br />
-                                    <Button 
-                                        type="submit"
-                                        content="Submit"
-                                        basic color="white"
-                                        inverted
-                                    />
-                                </Form>
-                            </div>
-                        ) : (
-                            console.log("denied access to notes")
-                        )}
                     </div>
                     <div className="details">
-                        <h3>
-                        About This Episode <br/><br/>
-                        {ReactHtmlParser (episodeObj.description_original)}</h3>
+                        <h3>About This Episode</h3>
+                        <h3 className="description">{episodeObj.description_original}</h3>
                     </div>
                 </div>
             </div>
@@ -279,8 +222,8 @@ class EpisodeDetails extends React.Component {
                         </div>
                     </div>
                     <div className="details">
-                        <h3>About This Episode <br/><br/>
-                        { ReactHtmlParser (this.state.stateEpisode.description)}</h3>
+                        <h3>About This Episode</h3>
+                        <h3>{this.state.stateEpisode.description}</h3>
                     </div>
                 </div>
             </div>) : (null)
@@ -301,14 +244,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         fetchEpisode: (playlistObj, episodeObj, id) => dispatch(fetchEpisode(playlistObj, episodeObj, id)),
-
         fetchPlaylist: (playlistObj) => dispatch(fetchPlaylist(playlistObj)),
-
         destroyPlaylistEpisode: (playlistObj, episodeObj, id) => dispatch(destroyPlaylistEpisode(playlistObj, episodeObj, id)),
-
-        removeEpisode: (episode) => dispatch(removeEpisode(episode)),
-
-        updateEpisodeNotes: (episode) => dispatch(updateEpisodeNotes(episode))
+        removeEpisode: (episode) => dispatch(removeEpisode(episode))
     }
 }
 

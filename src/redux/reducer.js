@@ -56,7 +56,7 @@ function episodeReducer(allUserEpisodes = [], action) {
             } else {
                 return [...allUserEpisodes, action.payload]
             }
-        
+
         case "UPDATE_EPISODE":
             let copyOfAllUserEpisodes = [...allUserEpisodes]
 
@@ -64,7 +64,7 @@ function episodeReducer(allUserEpisodes = [], action) {
 
             let index = copyOfAllUserEpisodes.indexOf(foundEpisode)
 
-            copyOfAllUserEpisodes.splice(index, 1, action.payload) 
+            copyOfAllUserEpisodes.splice(index, 1, action.payload)
 
             return copyOfAllUserEpisodes
 
@@ -77,17 +77,6 @@ function episodeReducer(allUserEpisodes = [], action) {
 
             return copyOfAllUserEpisodes2
 
-        case "UPDATE_EPISODE_NOTES":
-            let copyOfAllUserEpisodes3 = [...allUserEpisodes]
-
-            let foundEpisode2 = copyOfAllUserEpisodes3.find( ({id}) => id === action.payload.id)
-
-            let index3 = copyOfAllUserEpisodes3.indexOf(foundEpisode2)
-
-            copyOfAllUserEpisodes3.splice(index3, 1, action.payload)
-
-            return copyOfAllUserEpisodes3
-        
         case "REMOVE_ALL_EPISODES":
             return action.payload
 
